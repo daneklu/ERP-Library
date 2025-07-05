@@ -1,0 +1,10 @@
+[ {
+  "numeroCredencial" : "12345",
+  "nombre" : "JUAN LOPEZ",
+  "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
+  "telefono" : "3325767021",
+  "fechaRegistro" : [ 2025, 7, 5 ],
+  "multasPendientes" : 0.0,
+  "investigadorAutorizado" : false,
+  "nivelPermiso" : "CONSULTA"
+} ]

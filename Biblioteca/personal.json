@@ -1,0 +1,25 @@
+[ {
+  "numeroCredencial" : "123456",
+  "nombre" : "MARIA ANTON",
+  "correoElectronico" : "M.ANTON@ITESO.MX",
+  "telefono" : "6315357524",
+  "fechaRegistro" : [ 2025, 7, 5 ],
+  "departamento" : "TECNOLOGIA",
+  "nivelPermiso" : "ADMIN"
+}, {
+  "numeroCredencial" : "78910",
+  "nombre" : "MRTIA ANTY",
+  "correoElectronico" : "M.AON@ITESO.MX",
+  "telefono" : "4315354564",
+  "fechaRegistro" : [ 2025, 7, 5 ],
+  "departamento" : "HISTORICOS",
+  "nivelPermiso" : "ALTO"
+}, {
+  "numeroCredencial" : "1238956",
+  "nombre" : "ARIA SANTON",
+  "correoElectronico" : "MANT.N@ITESO.MX",
+  "telefono" : "9323657524",
+  "fechaRegistro" : [ 2025, 7, 5 ],
+  "departamento" : "ATENCION_PUBLICO",
+  "nivelPermiso" : "BAJO"
+} ]
