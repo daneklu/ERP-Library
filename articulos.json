@@ -1,0 +1,52 @@
+[
+  {
+    "type": "Libro",
+    "codigo": "LIB-001",
+    "titulo": "Don Quijote",
+    "anoPublicacion": 1605,
+    "editorial": "Planeta",
+    "disponible": true,
+    "costoMultaDiaria": 2.5,
+    "estado": "BUENO",
+    "idioma": "ESPANOL",
+    "historico": false,
+    "costoReparacion": 15.0,
+    "autor": "Miguel de Cervantes",
+    "isbn": "978-84-08-12345-6",
+    "genero": "CIENCIA_FICCION"
+  },
+  {
+    "type": "Revista",
+    "codigo": "REV-001",
+    "titulo": "National Geographic",
+    "anoPublicacion": 2022,
+    "editorial": "NatGeo",
+    "disponible": true,
+    "costoMultaDiaria": 1.5,
+    "estado": "BUENO",
+    "idioma": "INGLES",
+    "historico": false,
+    "costoReparacion": 5.0,
+    "issn": "1234-5678",
+    "numeroEdicion": 45,
+    "mesPublicacion": "Julio",
+    "tematica": "TECNOLOGIA"
+  },
+  {
+    "type": "Periodico",
+    "codigo": "PER-001",
+    "titulo": "El País",
+    "anoPublicacion": 2023,
+    "editorial": "Prensa Iberica",
+    "disponible": false,
+    "costoMultaDiaria": 1.0,
+    "estado": "DANADO",
+    "idioma": "ESPANOL",
+    "historico": false,
+    "costoReparacion": 2.0,
+    "issn": "8765-4321",
+    "fechaPublicacion": "2023-07-06",
+    "seccionPrincipal": "Internacional",
+    "paisOrigen": "España"
+  }
+]
