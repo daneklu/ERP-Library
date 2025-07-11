@@ -230,50 +230,62 @@ public class MainFrame extends JFrame {
 		panelCardLayout.add(pnlInventario, "inventario");
 		pnlInventario.setLayout(new BorderLayout(0, 0));
 
-		JMenuBar menuBar = new JMenuBar();
-		pnlInventario.add(menuBar, BorderLayout.NORTH);
-
-		JMenu mnNewMenu = new JMenu("Buscar Articulo");
-		menuBar.add(mnNewMenu);
-
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Buscar por Nombre");
-
-		mnNewMenu.add(mntmNewMenuItem_2);
-
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Buscar por codigo");
-		
-		mnNewMenu.add(mntmNewMenuItem_3);
-
-		JMenu mnNewMenu_1 = new JMenu("Modificar Inventario");
-		menuBar.add(mnNewMenu_1);
-
-		JMenuItem mntmNewMenuItem = new JMenuItem("Agregar Articulo");
-		
-		mnNewMenu_1.add(mntmNewMenuItem);
-
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Eliminar Articulo");
-
-		mnNewMenu_1.add(mntmNewMenuItem_1);
-
 		JPanel inventarioCardLayout = new JPanel();
 		inventarioCardLayout.setOpaque(false);
 		pnlInventario.add(inventarioCardLayout, BorderLayout.CENTER);
 		inventarioCardLayout.setLayout(new CardLayout(0, 0));
 
+		JMenuBar menuBarInventario = new JMenuBar();
+		pnlInventario.add(menuBarInventario, BorderLayout.NORTH);
+
+		JMenu mnNewMenu = new JMenu("Buscar Articulo");
+		menuBarInventario.add(mnNewMenu);
+
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Buscar por Nombre");
+		mntmNewMenuItem_2.addActionListener(e -> {
+			CardLayout layout = (CardLayout) inventarioCardLayout.getLayout();
+			layout.show(inventarioCardLayout, "buscarNombre");
+		});
+		mnNewMenu.add(mntmNewMenuItem_2);
+
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Buscar por codigo");
+		mntmNewMenuItem_3.addActionListener(e -> {
+			CardLayout layout = (CardLayout) inventarioCardLayout.getLayout();
+			layout.show(inventarioCardLayout, "buscarCodigo");
+		});
+		mnNewMenu.add(mntmNewMenuItem_3);
+
+		JMenu mnNewMenu_1 = new JMenu("Modificar Inventario");
+		menuBarInventario.add(mnNewMenu_1);
+
+		JMenuItem mntmNewMenuItem = new JMenuItem("Agregar Articulo");
+		mntmNewMenuItem.addActionListener(e -> {
+			CardLayout layout = (CardLayout) inventarioCardLayout.getLayout();
+			layout.show(inventarioCardLayout, "agregar");
+		});
+		mnNewMenu_1.add(mntmNewMenuItem);
+
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Eliminar Articulo");
+		mntmNewMenuItem_1.addActionListener(e -> {
+			CardLayout layout = (CardLayout) inventarioCardLayout.getLayout();
+			layout.show(inventarioCardLayout, "eliminar");
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_1);
+
 		JPanel pnlBuscarPorNombre = new JPanel();
-		pnlBuscarPorNombre.setBackground(Color.WHITE);
+		pnlBuscarPorNombre.setBackground(Color.YELLOW);
 		inventarioCardLayout.add(pnlBuscarPorNombre, "buscarNombre");
 
 		JPanel pnlBuscarPorCodigo = new JPanel();
-		pnlBuscarPorCodigo.setBackground(Color.GRAY);
+		pnlBuscarPorCodigo.setBackground(Color.MAGENTA);
 		inventarioCardLayout.add(pnlBuscarPorCodigo, "buscarCodigo");
 
 		JPanel pnlAgregarArticulo = new JPanel();
-		pnlAgregarArticulo.setBackground(Color.BLACK);
+		pnlAgregarArticulo.setBackground(Color.BLUE);
 		inventarioCardLayout.add(pnlAgregarArticulo, "agregar");
 
 		JPanel pnlEliminarArticulo = new JPanel();
-		pnlEliminarArticulo.setBackground(Color.PINK);
+		pnlEliminarArticulo.setBackground(Color.LIGHT_GRAY);
 		inventarioCardLayout.add(pnlEliminarArticulo, "eliminar");
 
 		JPanel pnlPrestamos = new JPanel();
@@ -281,51 +293,73 @@ public class MainFrame extends JFrame {
 		panelCardLayout.add(pnlPrestamos, "prestamos");
 		pnlPrestamos.setLayout(new BorderLayout(0, 0));
 
-		JMenuBar menuBar_1 = new JMenuBar();
-		pnlPrestamos.add(menuBar_1, BorderLayout.NORTH);
-
-		JMenu mnNewMenu_2 = new JMenu("Ver Préstamos");
-		menuBar_1.add(mnNewMenu_2);
-
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Ver Préstamos Activos");
-		mnNewMenu_2.add(mntmNewMenuItem_4);
-
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Ver Historial de Préstamos");
-		mnNewMenu_2.add(mntmNewMenuItem_5);
-
-		JMenu mnNewMenu_3 = new JMenu("Modificar Préstamos");
-		menuBar_1.add(mnNewMenu_3);
-
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Generar Préstamo");
-		mnNewMenu_3.add(mntmNewMenuItem_6);
-
-		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Modificar Estado de Préstamo");
-		mnNewMenu_3.add(mntmNewMenuItem_7);
-
 		JPanel prestamosCardLayout = new JPanel();
 		prestamosCardLayout.setOpaque(false);
 		pnlPrestamos.add(prestamosCardLayout, BorderLayout.CENTER);
 		prestamosCardLayout.setLayout(new CardLayout(0, 0));
 
+		JMenuBar menuBarPrestamos = new JMenuBar();
+		pnlPrestamos.add(menuBarPrestamos, BorderLayout.NORTH);
+
+		JMenu mnNewMenu_2 = new JMenu("Ver Préstamos");
+		menuBarPrestamos.add(mnNewMenu_2);
+
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Ver Préstamos Activos");
+		mntmNewMenuItem_4.addActionListener(e -> {
+			CardLayout layout = (CardLayout) prestamosCardLayout.getLayout();
+			layout.show(prestamosCardLayout, "prestamoActivo");
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_4);
+
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Ver Historial de Préstamos");
+		mntmNewMenuItem_5.addActionListener(e -> {
+			CardLayout layout = (CardLayout) prestamosCardLayout.getLayout();
+			layout.show(prestamosCardLayout, "historialPrestamo");
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_5);
+
+		JMenu mnNewMenu_3 = new JMenu("Modificar Préstamos");
+		menuBarPrestamos.add(mnNewMenu_3);
+
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Generar Préstamo");
+		mntmNewMenuItem_6.addActionListener(e -> {
+			CardLayout layout = (CardLayout) prestamosCardLayout.getLayout();
+			layout.show(prestamosCardLayout, "generarPrestamo");
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_6);
+
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Modificar Estado de Préstamo");
+		mntmNewMenuItem_7.addActionListener(e -> {
+			CardLayout layout = (CardLayout) prestamosCardLayout.getLayout();
+			layout.show(prestamosCardLayout, "modificarPrestamo");
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_7);
+
 		JPanel pnlPrestamosActivos = new JPanel();
-		prestamosCardLayout.add(pnlPrestamosActivos, "name_141593405642300");
+		pnlPrestamosActivos.setBackground(Color.DARK_GRAY);
+		prestamosCardLayout.add(pnlPrestamosActivos, "prestamoActivo");
 
 		JPanel pnlHistorialPrestamos = new JPanel();
-		pnlHistorialPrestamos.setBackground(Color.GRAY);
-		prestamosCardLayout.add(pnlHistorialPrestamos, "name_141602172515600");
+		pnlHistorialPrestamos.setBackground(Color.RED);
+		prestamosCardLayout.add(pnlHistorialPrestamos, "historialPrestamo");
 
 		JPanel pnlGenerarPrestamo = new JPanel();
-		pnlGenerarPrestamo.setBackground(Color.BLACK);
-		prestamosCardLayout.add(pnlGenerarPrestamo, "name_141607943856800");
+		pnlGenerarPrestamo.setBackground(Color.ORANGE);
+		prestamosCardLayout.add(pnlGenerarPrestamo, "generarPrestamo");
 
 		JPanel pnlModificarPrestamo = new JPanel();
-		pnlModificarPrestamo.setBackground(Color.PINK);
-		prestamosCardLayout.add(pnlModificarPrestamo, "name_141611843129300");
+		pnlModificarPrestamo.setBackground(Color.GREEN);
+		prestamosCardLayout.add(pnlModificarPrestamo, "modificarPrestamo");
 
 		JPanel pnlUsuarios = new JPanel();
 		pnlUsuarios.setBackground(new Color(247, 203, 164, 120));
 		panelCardLayout.add(pnlUsuarios, "usuarios");
 		pnlUsuarios.setLayout(new BorderLayout(0, 0));
+
+		JPanel usuariosCardLayout = new JPanel();
+		usuariosCardLayout.setOpaque(false);
+		pnlUsuarios.add(usuariosCardLayout, BorderLayout.CENTER);
+		usuariosCardLayout.setLayout(new CardLayout(0, 0));
 
 		JMenuBar menuBar_2 = new JMenuBar();
 		pnlUsuarios.add(menuBar_2, BorderLayout.NORTH);
@@ -334,44 +368,61 @@ public class MainFrame extends JFrame {
 		menuBar_2.add(mnNewMenu_4);
 
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Buscar por Nombre");
+		mntmNewMenuItem_8.addActionListener(e -> {
+			CardLayout layout = (CardLayout) usuariosCardLayout.getLayout();
+			layout.show(usuariosCardLayout, "buscarNombreUs");
+		});
 		mnNewMenu_4.add(mntmNewMenuItem_8);
 
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Buscar por ID");
+		mntmNewMenuItem_9.addActionListener(e -> {
+			CardLayout layout = (CardLayout) usuariosCardLayout.getLayout();
+			layout.show(usuariosCardLayout, "buscarIDUs");
+		});
 		mnNewMenu_4.add(mntmNewMenuItem_9);
 
 		JMenu mnNewMenu_5 = new JMenu("Modificar Usuario");
 		menuBar_2.add(mnNewMenu_5);
 
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Registrar Usuario");
+		mntmNewMenuItem_10.addActionListener(e -> {
+			CardLayout layout = (CardLayout) usuariosCardLayout.getLayout();
+			layout.show(usuariosCardLayout, "registrarUsuario");
+		});
 		mnNewMenu_5.add(mntmNewMenuItem_10);
 
 		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Eliminar Usuario");
+		mntmNewMenuItem_11.addActionListener(e -> {
+			CardLayout layout = (CardLayout) usuariosCardLayout.getLayout();
+			layout.show(usuariosCardLayout, "eliminarUsuario");
+		});
 		mnNewMenu_5.add(mntmNewMenuItem_11);
 
-		JPanel usuariosCardLayout = new JPanel();
-		usuariosCardLayout.setOpaque(false);
-		pnlUsuarios.add(usuariosCardLayout, BorderLayout.CENTER);
-		usuariosCardLayout.setLayout(new CardLayout(0, 0));
-
 		JPanel pnlBuscarPorNombreUs = new JPanel();
-		usuariosCardLayout.add(pnlBuscarPorNombreUs, "name_141707397930900");
+		pnlBuscarPorNombreUs.setBackground(Color.CYAN);
+		usuariosCardLayout.add(pnlBuscarPorNombreUs, "buscarNombreUs");
 
 		JPanel pnlBuscarPorIDUs = new JPanel();
-		pnlBuscarPorIDUs.setBackground(Color.GRAY);
-		usuariosCardLayout.add(pnlBuscarPorIDUs, "name_141712876357600");
+		pnlBuscarPorIDUs.setBackground(Color.WHITE);
+		usuariosCardLayout.add(pnlBuscarPorIDUs, "buscarIDUs");
 
 		JPanel pnlRegistrarUsuario = new JPanel();
-		pnlRegistrarUsuario.setBackground(Color.BLACK);
-		usuariosCardLayout.add(pnlRegistrarUsuario, "name_141717190672200");
+		pnlRegistrarUsuario.setBackground(Color.GRAY);
+		usuariosCardLayout.add(pnlRegistrarUsuario, "registrarUsuario");
 
 		JPanel pnlEliminarUsuario = new JPanel();
-		pnlEliminarUsuario.setBackground(Color.PINK);
-		usuariosCardLayout.add(pnlEliminarUsuario, "name_141720257964900");
+		pnlEliminarUsuario.setBackground(Color.BLACK);
+		usuariosCardLayout.add(pnlEliminarUsuario, "eliminarUsuario");
 
 		JPanel pnlPersonal = new JPanel();
 		pnlPersonal.setBackground(new Color(247, 203, 164, 120));
 		panelCardLayout.add(pnlPersonal, "personal");
 		pnlPersonal.setLayout(new BorderLayout(0, 0));
+
+		JPanel personalCardLayout = new JPanel();
+		personalCardLayout.setOpaque(false);
+		pnlPersonal.add(personalCardLayout, BorderLayout.CENTER);
+		personalCardLayout.setLayout(new CardLayout(0, 0));
 
 		JMenuBar menuBar_3 = new JMenuBar();
 		pnlPersonal.add(menuBar_3, BorderLayout.NORTH);
@@ -380,39 +431,51 @@ public class MainFrame extends JFrame {
 		menuBar_3.add(mnNewMenu_6);
 
 		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Buscar por Nombre");
+		mntmNewMenuItem_12.addActionListener(e -> {
+			CardLayout layout = (CardLayout) personalCardLayout.getLayout();
+			layout.show(personalCardLayout, "buscarNombreEm");
+		});
 		mnNewMenu_6.add(mntmNewMenuItem_12);
 
 		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Buscar por ID");
+		mntmNewMenuItem_13.addActionListener(e -> {
+			CardLayout layout = (CardLayout) personalCardLayout.getLayout();
+			layout.show(personalCardLayout, "buscarIDEm");
+		});
 		mnNewMenu_6.add(mntmNewMenuItem_13);
 
 		JMenu mnNewMenu_7 = new JMenu("Modificar Personal");
 		menuBar_3.add(mnNewMenu_7);
 
 		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Registrar Empleado");
+		mntmNewMenuItem_14.addActionListener(e -> {
+			CardLayout layout = (CardLayout) personalCardLayout.getLayout();
+			layout.show(personalCardLayout, "registrarEmpleado");
+		});
 		mnNewMenu_7.add(mntmNewMenuItem_14);
 
 		JMenuItem mntmNewMenuItem_15 = new JMenuItem("Eliminar Empleado");
+		mntmNewMenuItem_15.addActionListener(e -> {
+			CardLayout layout = (CardLayout) personalCardLayout.getLayout();
+			layout.show(personalCardLayout, "eliminarEmpleado");
+		});
 		mnNewMenu_7.add(mntmNewMenuItem_15);
 
-		JPanel personalCardLayout = new JPanel();
-		personalCardLayout.setOpaque(false);
-		pnlPersonal.add(personalCardLayout, BorderLayout.CENTER);
-		personalCardLayout.setLayout(new CardLayout(0, 0));
-
 		JPanel pnlBuscarPorNombreEm = new JPanel();
-		personalCardLayout.add(pnlBuscarPorNombreEm, "name_141746039899200");
+		pnlBuscarPorNombreEm.setBackground(Color.PINK);
+		personalCardLayout.add(pnlBuscarPorNombreEm, "buscarNombreEm");
 
 		JPanel pnlBuscarPorIDEm = new JPanel();
-		pnlBuscarPorIDEm.setBackground(Color.GRAY);
-		personalCardLayout.add(pnlBuscarPorIDEm, "name_141750774724800");
+		pnlBuscarPorIDEm.setBackground(Color.YELLOW);
+		personalCardLayout.add(pnlBuscarPorIDEm, "buscarIDEm");
 
 		JPanel pnlRegistrarEmpleado = new JPanel();
-		pnlRegistrarEmpleado.setBackground(Color.BLACK);
-		personalCardLayout.add(pnlRegistrarEmpleado, "name_141753797462200");
+		pnlRegistrarEmpleado.setBackground(Color.CYAN);
+		personalCardLayout.add(pnlRegistrarEmpleado, "registrarEmpleado");
 
 		JPanel pnlEliminarEmpleado = new JPanel();
-		pnlEliminarEmpleado.setBackground(Color.PINK);
-		personalCardLayout.add(pnlEliminarEmpleado, "name_141757030926100");
+		pnlEliminarEmpleado.setBackground(Color.DARK_GRAY);
+		personalCardLayout.add(pnlEliminarEmpleado, "eliminarEmpleado");
 
 		JPanel panelOpciones = new JPanel();
 		panelOpciones.setBounds(0, 0, 143, 576);
@@ -450,7 +513,7 @@ public class MainFrame extends JFrame {
 		btnInventario.setBackground(new Color(254, 253, 241));
 		panelOpciones.add(btnInventario);
 
-		JButton btnPrestamos = new JButton("Prestamos");
+		JButton btnPrestamos = new JButton("Préstamos");
 		btnPrestamos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(panelCardLayout, "prestamos");
