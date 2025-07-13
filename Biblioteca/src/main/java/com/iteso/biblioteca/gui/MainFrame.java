@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.SwingConstants;
 
-
 import com.iteso.biblioteca.manager.DataManager;
 import com.iteso.biblioteca.model.Empleado;
 import com.iteso.biblioteca.model.Usuario;
@@ -50,15 +49,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Panel;
 import java.awt.Scrollbar;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
 
 public class MainFrame extends JFrame {
 
 	DataManager dataManager = DataManager.getInstance();
 	ArrayList<Empleado> personal = dataManager.getPersonal();
-	ArrayList<Usuario> testUser = dataManager.getUsuarios();
-	
+	ArrayList<Usuario> usuarios = dataManager.getUsuarios();
 
 	private static final long serialVersionUID = 1L;
 	private JPanel backGround;
@@ -108,6 +104,10 @@ public class MainFrame extends JFrame {
 	private JTextField textField_39;
 	private JTable table_1;
 	private JTextField textField_40;
+	private JTable table_2;
+	private JTextField textField_41;
+	private JTable tableUsuariosN;
+	private JTextField textField_42;
 
 	public MainFrame() {
 		setIconImage(Toolkit.getDefaultToolkit()
@@ -367,15 +367,15 @@ public class MainFrame extends JFrame {
 		pnlBuscarPorNombre.setBackground(Color.YELLOW);
 		inventarioCardLayout.add(pnlBuscarPorNombre, "buscarNombre");
 		pnlBuscarPorNombre.setLayout(null);
-		
+
 		JPanel panel_6 = new JPanel();
 		panel_6.setBounds(10, 10, 361, 485);
 		pnlBuscarPorNombre.add(panel_6);
-		
+
 		JPanel panel_7 = new JPanel();
 		panel_7.setBounds(381, 10, 528, 485);
 		pnlBuscarPorNombre.add(panel_7);
-		
+
 		table = new JTable();
 		panel_7.add(table);
 
@@ -402,13 +402,13 @@ public class MainFrame extends JFrame {
 
 		JLabel lblNewLabel_30_2_1 = new JLabel("Agregar Libro");
 		lblNewLabel_30_2_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_30_2_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_30_2_1.setFont(new Font("Roboto", Font.BOLD, 18));
 		panel_7_2_1.add(lblNewLabel_30_2_1, BorderLayout.CENTER);
 
 		JLabel lblNewLabel_31_2_1 = new JLabel(
 				"Para agregar el libro al inventario llene todos los campos del formulario");
 		lblNewLabel_31_2_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_31_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_31_2_1.setFont(new Font("Roboto", Font.PLAIN, 15));
 		panel_7_2_1.add(lblNewLabel_31_2_1, BorderLayout.SOUTH);
 
 		JPanel panel_9_2_1 = new JPanel();
@@ -596,13 +596,13 @@ public class MainFrame extends JFrame {
 
 		JLabel lblNewLabel_30_2_1_1 = new JLabel("Agregar Revista");
 		lblNewLabel_30_2_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_30_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_30_2_1_1.setFont(new Font("Roboto", Font.BOLD, 18));
 		panel_7_2_1_1.add(lblNewLabel_30_2_1_1, BorderLayout.CENTER);
 
 		JLabel lblNewLabel_31_2_1_1 = new JLabel(
 				"Para agregar la revista al inventario llene todos los campos del formulario");
 		lblNewLabel_31_2_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_31_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_31_2_1_1.setFont(new Font("Roboto", Font.PLAIN, 15));
 		panel_7_2_1_1.add(lblNewLabel_31_2_1_1, BorderLayout.SOUTH);
 
 		JPanel panel_9_2_1_1 = new JPanel();
@@ -1094,12 +1094,61 @@ public class MainFrame extends JFrame {
 		mnNewMenu_5.add(mntmNewMenuItem_11);
 
 		JPanel pnlBuscarPorNombreUs = new JPanel();
+		pnlBuscarPorNombreUs.setOpaque(false);
 		pnlBuscarPorNombreUs.setBackground(Color.CYAN);
 		usuariosCardLayout.add(pnlBuscarPorNombreUs, "buscarNombreUs");
+		pnlBuscarPorNombreUs.setLayout(null);
+
+		JPanel panel_9_5 = new JPanel();
+		panel_9_5.setBounds(10, 10, 899, 496);
+		pnlBuscarPorNombreUs.add(panel_9_5);
+		panel_9_5.setLayout(new BorderLayout(0, 0));
+
+		JScrollBar scrollBar_4 = new JScrollBar();
+		panel_9_5.add(scrollBar_4, BorderLayout.EAST);
+
+		JScrollBar scrollBar_5 = new JScrollBar();
+		scrollBar_5.setOrientation(JScrollBar.HORIZONTAL);
+		panel_9_5.add(scrollBar_5, BorderLayout.SOUTH);
+
+		tableUsuariosN = new JTable();
+		DefaultTableModel modelUsuarios = new DefaultTableModel(new Object[][] {}, new String[] { "Credencial",
+				"Nombre", "Correo", "Telefono", "Multas", "Investigador Autorizado", "Permiso" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class, String.class, Object.class, Double.class,
+					Boolean.class, String.class };
+
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		};
+		for (Usuario user : usuarios) {
+			modelUsuarios.addRow(new Object[] { user.getNumeroCredencial(), user.getNombre(),
+					user.getCorreoElectronico(), user.getTelefono(), user.getMultasPendientes(),
+					user.isInvestigadorAutorizado(), user.getNivelPermiso().toString() });
+		}
+		tableUsuariosN.setModel(modelUsuarios);
+		panel_9_5.add(tableUsuariosN, BorderLayout.CENTER);
+
+		JPanel panel_10 = new JPanel();
+		panel_9_5.add(panel_10, BorderLayout.NORTH);
+		panel_10.setLayout(new BorderLayout(0, 0));
+
+		JLabel lblNewLabel_29 = new JLabel(" Ingrese Nombre de Usuario ");
+		lblNewLabel_29.setFont(new Font("Roboto", Font.PLAIN, 10));
+		panel_10.add(lblNewLabel_29, BorderLayout.WEST);
+
+		textField_42 = new JTextField();
+		panel_10.add(textField_42, BorderLayout.CENTER);
+		textField_42.setColumns(10);
+
+		JButton btnNewButton_3 = new JButton("Confirmar");
+		btnNewButton_3.setFont(new Font("Roboto", Font.PLAIN, 10));
+		panel_10.add(btnNewButton_3, BorderLayout.EAST);
 
 		JPanel pnlBuscarPorIDUs = new JPanel();
 		pnlBuscarPorIDUs.setBackground(Color.WHITE);
 		usuariosCardLayout.add(pnlBuscarPorIDUs, "buscarIDUs");
+		pnlBuscarPorIDUs.setLayout(null);
 
 		JPanel pnlRegistrarUsuario = new JPanel();
 		pnlRegistrarUsuario.setOpaque(false);
@@ -1120,12 +1169,12 @@ public class MainFrame extends JFrame {
 
 		JLabel lblNewLabel_30_2 = new JLabel("Registrar Usuario");
 		lblNewLabel_30_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_30_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_30_2.setFont(new Font("Roboto", Font.BOLD, 18));
 		panel_7_2.add(lblNewLabel_30_2, BorderLayout.CENTER);
 
 		JLabel lblNewLabel_31_2 = new JLabel("Para registrar al Usuario llene todos los campos del formulario");
 		lblNewLabel_31_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_31_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_31_2.setFont(new Font("Roboto", Font.PLAIN, 16));
 		panel_7_2.add(lblNewLabel_31_2, BorderLayout.SOUTH);
 
 		JPanel panel_9_2 = new JPanel();
@@ -1229,6 +1278,7 @@ public class MainFrame extends JFrame {
 		JPanel pnlEliminarUsuario = new JPanel();
 		pnlEliminarUsuario.setBackground(Color.BLACK);
 		usuariosCardLayout.add(pnlEliminarUsuario, "eliminarUsuario");
+		pnlEliminarUsuario.setLayout(null);
 
 		JPanel pnlPersonal = new JPanel();
 		pnlPersonal.setBackground(new Color(247, 203, 164, 120));
@@ -1282,64 +1332,53 @@ public class MainFrame extends JFrame {
 		pnlBuscarPorNombreEm.setBackground(new Color(247, 203, 164, 120));
 		personalCardLayout.add(pnlBuscarPorNombreEm, "buscarNombreEm");
 		pnlBuscarPorNombreEm.setLayout(null);
-		
+
 		JPanel panel_9 = new JPanel();
 		panel_9.setBounds(10, 10, 899, 496);
 		pnlBuscarPorNombreEm.add(panel_9);
 		panel_9.setLayout(new BorderLayout(0, 0));
-		
+
 		JScrollBar scrollBar = new JScrollBar();
 		panel_9.add(scrollBar, BorderLayout.EAST);
-		
+
 		table_Empleado = new JTable();
 		table_Empleado.setEnabled(false);
 		table_Empleado.setFont(new Font("Roboto", Font.PLAIN, 10));
-		DefaultTableModel model = new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Credencial", "Nombre", "Correo", "Tel\u00E9fono", "Puesto", "Departamento", "Permiso"
-				}
-			) {
-				Class[] columnTypes = new Class[] {
-					String.class, String.class, String.class, String.class, String.class, String.class, String.class
-				};
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-			};
-			for (Empleado emp : personal) {
-			    model.addRow(new Object[]{
-			        emp.getNumeroCredencial(),
-			        emp.getNombre(),
-			        emp.getCorreoElectronico(),
-			        emp.getTelefono(),
-			        emp.getPuesto().toString(),       
-			        emp.getDepartamento().toString(),  
-			        emp.getNivelPermiso().toString()  
-			    });
+		DefaultTableModel modelPersonal = new DefaultTableModel(new Object[][] {}, new String[] { "Credencial",
+				"Nombre", "Correo", "Tel\u00E9fono", "Puesto", "Departamento", "Permiso" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class, String.class, String.class, String.class,
+					String.class, String.class };
+
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
 			}
-			
-		table_Empleado.setModel(model);
+		};
+		for (Empleado emp : personal) {
+			modelPersonal.addRow(new Object[] { emp.getNumeroCredencial(), emp.getNombre(), emp.getCorreoElectronico(),
+					emp.getTelefono(), emp.getPuesto().toString(), emp.getDepartamento().toString(),
+					emp.getNivelPermiso().toString() });
+		}
+
+		table_Empleado.setModel(modelPersonal);
 		table_Empleado.getColumnModel().getColumn(0).setPreferredWidth(103);
 		panel_9.add(table_Empleado, BorderLayout.CENTER);
-		
+
 		Panel panel_8 = new Panel();
 		panel_9.add(panel_8, BorderLayout.NORTH);
 		panel_8.setLayout(new BorderLayout(0, 0));
-		
+
 		JLabel lblNewLabel_28 = new JLabel(" Ingrese Nombre de Empleado ");
 		lblNewLabel_28.setFont(new Font("Roboto", Font.PLAIN, 12));
 		panel_8.add(lblNewLabel_28, BorderLayout.WEST);
-		
+
 		textField_39 = new JTextField();
 		panel_8.add(textField_39, BorderLayout.CENTER);
 		textField_39.setColumns(10);
-		
+
 		JButton btnNewButton = new JButton("Confirmar");
 		btnNewButton.setFont(new Font("Roboto", Font.PLAIN, 10));
 		panel_8.add(btnNewButton, BorderLayout.EAST);
-		
+
 		JScrollBar scrollBar_1 = new JScrollBar();
 		scrollBar_1.setOrientation(JScrollBar.HORIZONTAL);
 		panel_9.add(scrollBar_1, BorderLayout.SOUTH);
@@ -1349,66 +1388,41 @@ public class MainFrame extends JFrame {
 		pnlBuscarPorIDEm.setBackground(new Color(247, 203, 164));
 		personalCardLayout.add(pnlBuscarPorIDEm, "buscarIDEm");
 		pnlBuscarPorIDEm.setLayout(null);
-		
+
 		JPanel panel_9_3 = new JPanel();
 		panel_9_3.setBounds(10, 10, 899, 496);
 		pnlBuscarPorIDEm.add(panel_9_3);
 		panel_9_3.setLayout(new BorderLayout(0, 0));
-		
+
 		JScrollBar scrollBar_2 = new JScrollBar();
 		panel_9_3.add(scrollBar_2, BorderLayout.EAST);
-		
+
 		table_1 = new JTable();
 		table_1.setFont(new Font("Roboto", Font.PLAIN, 10));
 		table_1.setEnabled(false);
-		DefaultTableModel model_1 = new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Credencial", "Nombre", "Correo", "Tel\u00E9fono", "Puesto", "Departamento", "Permiso"
-				}
-			) {
-				Class[] columnTypes = new Class[] {
-					String.class, String.class, String.class, String.class, String.class, String.class, String.class
-				};
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-			};
-			for (Empleado emp : personal) {
-			    model.addRow(new Object[]{
-			        emp.getNumeroCredencial(),
-			        emp.getNombre(),
-			        emp.getCorreoElectronico(),
-			        emp.getTelefono(),
-			        emp.getPuesto().toString(),       
-			        emp.getDepartamento().toString(),  
-			        emp.getNivelPermiso().toString()  
-			    });
-			}
-		
-			table_1.setModel(model);
-			table_1.getColumnModel().getColumn(0).setPreferredWidth(103);	
+
+		table_1.setModel(modelPersonal);
+		table_1.getColumnModel().getColumn(0).setPreferredWidth(103);
 		panel_9_3.add(table_1, BorderLayout.CENTER);
-		
+
 		Panel panel_8_3 = new Panel();
 		panel_9_3.add(panel_8_3, BorderLayout.NORTH);
 		panel_8_3.setLayout(new BorderLayout(0, 0));
-		
+
 		JLabel lblNewLabel_28_3 = new JLabel(" Ingrese ID de Empleado ");
 		lblNewLabel_28_3.setFont(new Font("Roboto", Font.PLAIN, 12));
 		panel_8_3.add(lblNewLabel_28_3, BorderLayout.WEST);
-		
+
 		textField_40 = new JTextField();
 		textField_40.setColumns(10);
 		panel_8_3.add(textField_40, BorderLayout.CENTER);
-		
+
 		JButton btnNewButton_1 = new JButton("Confirmar");
 		btnNewButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnNewButton_1.setFont(new Font("Roboto", Font.PLAIN, 10));
 		panel_8_3.add(btnNewButton_1, BorderLayout.EAST);
-		panel_8_3.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblNewLabel_28_3, textField_40, btnNewButton_1}));
 		
+
 		JScrollBar scrollBar_1_1 = new JScrollBar();
 		scrollBar_1_1.setOrientation(JScrollBar.HORIZONTAL);
 		panel_9_3.add(scrollBar_1_1, BorderLayout.SOUTH);
@@ -1543,8 +1557,46 @@ public class MainFrame extends JFrame {
 		panel_8_1.add(btnNewButton_2_1);
 
 		JPanel pnlEliminarEmpleado = new JPanel();
+		pnlEliminarEmpleado.setOpaque(false);
 		pnlEliminarEmpleado.setBackground(Color.DARK_GRAY);
 		personalCardLayout.add(pnlEliminarEmpleado, "eliminarEmpleado");
+		pnlEliminarEmpleado.setLayout(null);
+
+		JPanel panel_9_4 = new JPanel();
+		panel_9_4.setBounds(10, 10, 899, 496);
+		pnlEliminarEmpleado.add(panel_9_4);
+		panel_9_4.setLayout(new BorderLayout(0, 0));
+
+		JScrollBar scrollBar_3 = new JScrollBar();
+		panel_9_4.add(scrollBar_3, BorderLayout.EAST);
+
+		table_2 = new JTable();
+		table_2.setFont(new Font("Roboto", Font.PLAIN, 10));
+		table_2.setEnabled(false);
+		table_2.setModel(modelPersonal);
+		table_2.getColumnModel().getColumn(0).setPreferredWidth(103);
+		panel_9_4.add(table_2, BorderLayout.CENTER);
+
+		JScrollBar scrollBar_1_2 = new JScrollBar();
+		scrollBar_1_2.setOrientation(JScrollBar.HORIZONTAL);
+		panel_9_4.add(scrollBar_1_2, BorderLayout.SOUTH);
+
+		Panel panel_8_3_1 = new Panel();
+		panel_9_4.add(panel_8_3_1, BorderLayout.NORTH);
+		panel_8_3_1.setLayout(new BorderLayout(0, 0));
+
+		JLabel lblNewLabel_28_3_1 = new JLabel(" Ingrese ID de Empleado ");
+		lblNewLabel_28_3_1.setFont(new Font("Roboto", Font.PLAIN, 12));
+		panel_8_3_1.add(lblNewLabel_28_3_1, BorderLayout.WEST);
+
+		textField_41 = new JTextField();
+		textField_41.setColumns(10);
+		panel_8_3_1.add(textField_41, BorderLayout.CENTER);
+
+		JButton btnNewButton_1_1 = new JButton("Confirmar");
+		btnNewButton_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnNewButton_1_1.setFont(new Font("Roboto", Font.PLAIN, 10));
+		panel_8_3_1.add(btnNewButton_1_1, BorderLayout.EAST);
 
 		JPanel panelOpciones = new JPanel();
 		panelOpciones.setBounds(0, 0, 143, 576);
@@ -1630,11 +1682,10 @@ public class MainFrame extends JFrame {
 		panelOpciones.add(separator);
 
 		JLabel lblNewLabel_24 = new JLabel("ITESO");
-		lblNewLabel_24.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_24.setFont(new Font("Roboto", Font.BOLD, 18));
 		lblNewLabel_24.setForeground(Color.WHITE);
 		lblNewLabel_24.setBounds(42, 96, 58, 22);
 		panelOpciones.add(lblNewLabel_24);
-		
 
 		JLabel lblBackGround = new JLabel("");
 		lblBackGround.setOpaque(true);
