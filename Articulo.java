@@ -1,7 +1,7 @@
+package com.iteso.biblioteca.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
-
-
+import com.iteso.biblioteca.Biblioteca;
 
 enum Genero {
     POESIA,
@@ -16,7 +16,10 @@ enum TematicaRevista {
 }
 
 enum Estado {
-	BUENO, DANADO, PERDIDO
+    BUENO,
+    DANADO,
+    PERDIDO,
+    DETERIORADO // Agregado para registrar devoluciones dañadas
 }
 
 enum Idioma {
@@ -26,8 +29,7 @@ enum Idioma {
     ALEMAN
 }
 
-
-public abstract class Articulo {
+public abstract class Articulo extends Biblioteca {
     protected String codigo;
     protected String titulo;
     protected int anoPublicacion;
@@ -60,5 +62,51 @@ public abstract class Articulo {
 
     public boolean esPrestable() {
         return disponible && !historico && estado != Estado.PERDIDO;
+    }
+
+
+    public double getCostoMultaDiaria() {
+        return costoMultaDiaria;
+    }
+
+    public double getCostoReparacion() {
+        return costoReparacion;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public int getAnoPublicacion() {
+        return anoPublicacion;
+    }
+
+    public String getEditorial() {
+        return editorial;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public Idioma getIdioma() {
+        return idioma;
+    }
+
+    public boolean isHistorico() {
+        return historico;
     }
 }

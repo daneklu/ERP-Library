@@ -1,3 +1,4 @@
+package com.iteso.biblioteca.model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class Libro extends Articulo {
