@@ -14,6 +14,7 @@ import com.iteso.biblioteca.model.Articulo;
 import com.iteso.biblioteca.model.Empleado;
 import com.iteso.biblioteca.model.Libro;
 import com.iteso.biblioteca.model.Periodico;
+import com.iteso.biblioteca.model.Prestamo;
 import com.iteso.biblioteca.model.Revista;
 import com.iteso.biblioteca.model.Usuario;
 
@@ -25,6 +26,9 @@ public class Biblioteca {
 		ArrayList<Empleado> personal = dataManager.getPersonal();
 		ArrayList<Usuario> usuarios = dataManager.getUsuarios();
 		ArrayList<Articulo> inventario = dataManager.getInventario();
+		ArrayList<Prestamo> prestamosActivos = dataManager.getPrestamosActivos();
+		ArrayList<Prestamo> historialPrestamos = dataManager.getHistorialPrestamos();
+
 //		Libro l1 =new Libro("LIB-002", "Cien años de soledad", 1967, "Sudamericana", 
 //                true, 10.0, 200.0, Estado.BUENO, Idioma.ESPAÑOL, false,
 //                "Gabriel García Márquez", "978-0307474728", Genero.NOVELA);
@@ -68,8 +72,17 @@ public class Biblioteca {
 //		dataManager.agregarInventario(r3);
 //		dataManager.agregarInventario(p1);
 //		dataManager.agregarInventario(p2);
-//		dataManager.agregarInventario(p3);
-		
+////		dataManager.agregarInventario(p3);
+//		Prestamo p1 = new Prestamo(inventario.get(0),personal.get(1),usuarios.get(0));
+//		Prestamo p2 = new Prestamo(inventario.get(3),personal.get(2),usuarios.get(2));
+//		Prestamo p3 = new Prestamo(inventario.get(7),personal.get(1), usuarios.get(3));
+////		p3.registrarDevolucion(true);
+//		
+//		dataManager.agregarPrestamoActivo(p1);
+//		dataManager.agregarPrestamoActivo(p2);
+//		dataManager.agregarPrestamoHistorial(p1);
+//		dataManager.agregarPrestamoHistorial(p2);
+//		dataManager.agregarPrestamoHistorial(p3);
 		try {
 			MainFrame frame = new MainFrame();
 			frame.setVisible(true);
@@ -96,6 +109,9 @@ public class Biblioteca {
 		System.out.println(personal);
 		System.out.println(usuarios);
 		System.out.println(inventario);
+		System.out.println(prestamosActivos);
+		System.out.println(historialPrestamos);
+
 		dataManager.guardarTodo();
 
 	}

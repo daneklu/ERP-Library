@@ -1,6 +1,9 @@
 package com.iteso.biblioteca.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.iteso.biblioteca.enums.EstadoPrestamo;
 import com.iteso.biblioteca.enums.Estado;
 
@@ -28,8 +31,8 @@ public class Prestamo {
 		setEstadoPrestamo(EstadoPrestamo.ACTIVO);
 	}
 
-	private String setIdPrestamo() {
-		return "PR-" + LocalDate.EPOCH;
+	private void setIdPrestamo() {
+		this.idPrestamo = "PR-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
 	}
 
 	public void setArticulo(Articulo articulo) {

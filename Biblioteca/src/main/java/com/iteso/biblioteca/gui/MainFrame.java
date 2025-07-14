@@ -589,7 +589,7 @@ public class MainFrame extends JFrame {
 
 		JComboBox comboBox_2_2 = new JComboBox();
 		comboBox_2_2.setModel(new DefaultComboBoxModel(Estado.values()));
-		comboBox_2_2.setFont(new Font("Roboto", Font.PLAIN, 10));
+		comboBox_2_2.setFont(new Font("Roboto", Font.PLAIN, 12));
 		comboBox_2_2.setBounds(268, 252, 224, 20);
 		panel_8_2_1_2_1_1.add(comboBox_2_2);
 
@@ -643,6 +643,7 @@ public class MainFrame extends JFrame {
 		panel_8_2_1_2_1_1.add(textField_15);
 
 		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setFont(new Font("Roboto", Font.PLAIN, 12));
 		comboBox_3.setModel(new DefaultComboBoxModel(Idioma.values()));
 		comboBox_3.setBounds(31, 301, 227, 21);
 		panel_8_2_1_2_1_1.add(comboBox_3);
@@ -1585,6 +1586,7 @@ public class MainFrame extends JFrame {
 		panel_8_2.add(lblNewLabel_32_2);
 
 		textField_12 = new JTextField();
+		textField_12.setText("+52-");
 		textField_12.setForeground(new Color(0, 0, 0));
 		textField_12.setFont(new Font("Roboto", Font.PLAIN, 12));
 		textField_12.setColumns(10);
@@ -1911,6 +1913,10 @@ public class MainFrame extends JFrame {
 		panel_8_1.add(textField_6);
 
 		JButton btnNewButton_2_1 = new JButton("Confirmar");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_2_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		btnNewButton_2_1.setBounds(208, 419, 111, 25);
 		panel_8_1.add(btnNewButton_2_1);

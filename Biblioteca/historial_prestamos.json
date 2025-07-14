@@ -1,1 +1,132 @@
-[ ]
+[ {
+  "idPrestamo" : "PR-20250714-155923",
+  "articulo" : {
+    "tipo" : "libro",
+    "codigo" : "LIB-002",
+    "titulo" : "Cien años de soledad",
+    "añoPublicacion" : 1967,
+    "editorial" : "Sudamericana",
+    "disponible" : true,
+    "costoMultaDiaria" : 10.0,
+    "costoReparacion" : 0.0,
+    "estado" : "BUENO",
+    "idioma" : "ESPAÑOL",
+    "historico" : false,
+    "autor" : "Gabriel García Márquez",
+    "isbn" : "978-0307474728",
+    "genero" : "NOVELA"
+  },
+  "empleadoRegistrador" : {
+    "numeroCredencial" : "EMP-10002",
+    "nombre" : "JUAN MARTÍNEZ RODRÍGUEZ",
+    "correoElectronico" : "J.MARTINEZ@ITESO.MX",
+    "telefono" : "+52-3323456789",
+    "fechaRegistro" : [ 2025, 7, 14 ],
+    "puesto" : "ASISTENTE_BIBLIOTECA",
+    "departamento" : "ATENCION_PUBLICO",
+    "nivelPermiso" : "BAJO"
+  },
+  "usuario" : {
+    "numeroCredencial" : "US-12345",
+    "nombre" : "JUAN LOPEZ LOPEZ",
+    "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
+    "telefono" : "+52-3325767021",
+    "fechaRegistro" : [ 2025, 7, 14 ],
+    "multasPendientes" : 0.0,
+    "investigadorAutorizado" : false,
+    "nivelPermiso" : "CONSULTA"
+  },
+  "fechaPrestamo" : [ 2025, 7, 14 ],
+  "fechaVencimiento" : [ 2025, 7, 28 ],
+  "fechaDevolucion" : null,
+  "estado" : "ACTIVO",
+  "multaGenerada" : 0.0
+}, {
+  "idPrestamo" : "PR-20250714-155923",
+  "articulo" : {
+    "tipo" : "revista",
+    "codigo" : "R-002",
+    "titulo" : "National Geographic",
+    "añoPublicacion" : 2023,
+    "editorial" : "National Geographic Society",
+    "disponible" : true,
+    "costoMultaDiaria" : 15.0,
+    "costoReparacion" : 0.0,
+    "estado" : "BUENO",
+    "idioma" : "INGLES",
+    "historico" : false,
+    "issn" : "ISSN-001",
+    "numeroEdicion" : 250,
+    "mesPublicacion" : "Octubre",
+    "tematica" : "CIENCIA"
+  },
+  "empleadoRegistrador" : {
+    "numeroCredencial" : "EMP-10003",
+    "nombre" : "ANA HERNÁNDEZ SÁNCHEZ",
+    "correoElectronico" : "A.HERNANDEZ@ITESO.MX",
+    "telefono" : "+52-3334567890",
+    "fechaRegistro" : [ 2025, 7, 14 ],
+    "puesto" : "BIBLIOTECARIO",
+    "departamento" : "ATENCION_PUBLICO",
+    "nivelPermiso" : "MEDIO"
+  },
+  "usuario" : {
+    "numeroCredencial" : "US-23456",
+    "nombre" : "CARLOS MARTINEZ PARTIDA",
+    "correoElectronico" : "CARLOS.MARTINEZ@ITESO.MX",
+    "telefono" : "+52-3312345678",
+    "fechaRegistro" : [ 2025, 7, 10 ],
+    "multasPendientes" : 0.0,
+    "investigadorAutorizado" : false,
+    "nivelPermiso" : "CONSULTA"
+  },
+  "fechaPrestamo" : [ 2025, 7, 14 ],
+  "fechaVencimiento" : [ 2025, 7, 28 ],
+  "fechaDevolucion" : null,
+  "estado" : "ACTIVO",
+  "multaGenerada" : 0.0
+}, {
+  "idPrestamo" : "PR-20250714-155923",
+  "articulo" : {
+    "tipo" : "periodico",
+    "codigo" : "P-003",
+    "titulo" : "El País",
+    "añoPublicacion" : 2023,
+    "editorial" : "PRISA",
+    "disponible" : true,
+    "costoMultaDiaria" : 4.0,
+    "costoReparacion" : 0.0,
+    "estado" : "DETERIORADO",
+    "idioma" : "ESPAÑOL",
+    "historico" : false,
+    "issn" : "ISSN-EPA",
+    "fechaPublicacion" : [ 2023, 10, 14 ],
+    "seccionPrincipal" : null,
+    "paisOrigen" : "España"
+  },
+  "empleadoRegistrador" : {
+    "numeroCredencial" : "EMP-10002",
+    "nombre" : "JUAN MARTÍNEZ RODRÍGUEZ",
+    "correoElectronico" : "J.MARTINEZ@ITESO.MX",
+    "telefono" : "+52-3323456789",
+    "fechaRegistro" : [ 2025, 7, 14 ],
+    "puesto" : "ASISTENTE_BIBLIOTECA",
+    "departamento" : "ATENCION_PUBLICO",
+    "nivelPermiso" : "BAJO"
+  },
+  "usuario" : {
+    "numeroCredencial" : "US-78901",
+    "nombre" : "SOFIA GONZALEZ HERNANDEZ",
+    "correoElectronico" : "SOFIA.HERNANDEZ@ITESO.MX",
+    "telefono" : "+52-3334567890",
+    "fechaRegistro" : [ 2025, 5, 30 ],
+    "multasPendientes" : 25.75,
+    "investigadorAutorizado" : true,
+    "nivelPermiso" : "CONSULTA"
+  },
+  "fechaPrestamo" : [ 2025, 7, 14 ],
+  "fechaVencimiento" : [ 2025, 7, 28 ],
+  "fechaDevolucion" : [ 2025, 7, 14 ],
+  "estado" : "DEVUELTO_DAÑADO",
+  "multaGenerada" : 0.0
+} ]

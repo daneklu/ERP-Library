@@ -1,37 +1,127 @@
 [ {
-  "numeroCredencial" : "12345",
-  "nombre" : "JUAN LOPEZ",
+  "numeroCredencial" : "US-12345",
+  "nombre" : "JUAN LOPEZ LOPEZ",
   "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
-  "telefono" : "3325767021",
+  "telefono" : "+52-3325767021",
   "fechaRegistro" : [ 2025, 7, 14 ],
   "multasPendientes" : 0.0,
   "investigadorAutorizado" : false,
   "nivelPermiso" : "CONSULTA"
 }, {
-  "numeroCredencial" : "12345",
-  "nombre" : "JUAN LOPEZ",
-  "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
-  "telefono" : "3325767021",
-  "fechaRegistro" : [ 2025, 7, 14 ],
+  "numeroCredencial" : "US-67891",
+  "nombre" : "ANA GARCIA ROMERO",
+  "correoElectronico" : "ANA.GARCIA@ITESO.MX",
+  "telefono" : "+52-3347891234",
+  "fechaRegistro" : [ 2025, 6, 22 ],
+  "multasPendientes" : 15.5,
+  "investigadorAutorizado" : true,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-23456",
+  "nombre" : "CARLOS MARTINEZ PARTIDA",
+  "correoElectronico" : "CARLOS.MARTINEZ@ITESO.MX",
+  "telefono" : "+52-3312345678",
+  "fechaRegistro" : [ 2025, 7, 10 ],
   "multasPendientes" : 0.0,
   "investigadorAutorizado" : false,
   "nivelPermiso" : "CONSULTA"
 }, {
-  "numeroCredencial" : "12345",
-  "nombre" : "JUAN LOPEZ",
-  "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
-  "telefono" : "3325767021",
-  "fechaRegistro" : [ 2025, 7, 14 ],
+  "numeroCredencial" : "US-78901",
+  "nombre" : "SOFIA GONZALEZ HERNANDEZ",
+  "correoElectronico" : "SOFIA.HERNANDEZ@ITESO.MX",
+  "telefono" : "+52-3334567890",
+  "fechaRegistro" : [ 2025, 5, 30 ],
+  "multasPendientes" : 25.75,
+  "investigadorAutorizado" : true,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-34567",
+  "nombre" : "LUIS FERNANDEZ CASTILLO",
+  "correoElectronico" : "LUIS.FERNANDEZ@ITESO.MX",
+  "telefono" : "+52-3356789012",
+  "fechaRegistro" : [ 2025, 4, 15 ],
+  "multasPendientes" : 10.25,
+  "investigadorAutorizado" : false,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-89012",
+  "nombre" : "MARIA JIMENEZ ORTEGA",
+  "correoElectronico" : "MARIA.JIMENEZ@ITESO.MX",
+  "telefono" : "+52-3367890123",
+  "fechaRegistro" : [ 2025, 7, 1 ],
+  "multasPendientes" : 0.0,
+  "investigadorAutorizado" : true,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-45678",
+  "nombre" : "JORGE DIAZ SANTOS",
+  "correoElectronico" : "JORGE.DIAZ@ITESO.MX",
+  "telefono" : "+52-3378901234",
+  "fechaRegistro" : [ 2025, 3, 18 ],
+  "multasPendientes" : 32.5,
+  "investigadorAutorizado" : false,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-90123",
+  "nombre" : "PATRICIA RUIZ VARGAS",
+  "correoElectronico" : "PATRICIA.RUIZ@ITESO.MX",
+  "telefono" : "+52-3389012345",
+  "fechaRegistro" : [ 2025, 6, 5 ],
+  "multasPendientes" : 5.75,
+  "investigadorAutorizado" : true,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-56789",
+  "nombre" : "ROBERTO MORALES GUTIERREZ",
+  "correoElectronico" : "ROBERTO.MORALES@ITESO.MX",
+  "telefono" : "+52-3390123456",
+  "fechaRegistro" : [ 2025, 2, 28 ],
   "multasPendientes" : 0.0,
   "investigadorAutorizado" : false,
   "nivelPermiso" : "CONSULTA"
 }, {
-  "numeroCredencial" : "12345",
-  "nombre" : "JUAN LOPEZ",
-  "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
-  "telefono" : "3325767021",
-  "fechaRegistro" : [ 2025, 7, 14 ],
+  "numeroCredencial" : "US-01234",
+  "nombre" : "FERNANDA CASTRO MENDOZA",
+  "correoElectronico" : "FERNANDA.CASTRO@ITESO.MX",
+  "telefono" : "+52-3301234567",
+  "fechaRegistro" : [ 2025, 7, 3 ],
+  "multasPendientes" : 18.3,
+  "investigadorAutorizado" : true,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-13579",
+  "nombre" : "MIGUEL ANGEL RAMIREZ FLORES",
+  "correoElectronico" : "MIGUEL.RAMIREZ@ITESO.MX",
+  "telefono" : "+52-3345678901",
+  "fechaRegistro" : [ 2025, 1, 10 ],
   "multasPendientes" : 0.0,
   "investigadorAutorizado" : false,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-24680",
+  "nombre" : "ALEJANDRA TORRES NAVARRO",
+  "correoElectronico" : "ALEJANDRA.TORRES@ITESO.MX",
+  "telefono" : "+52-3356789012",
+  "fechaRegistro" : [ 2025, 5, 12 ],
+  "multasPendientes" : 7.8,
+  "investigadorAutorizado" : true,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-35791",
+  "nombre" : "JAVIER HERRERA MEJIA",
+  "correoElectronico" : "JAVIER.HERRERA@ITESO.MX",
+  "telefono" : "+52-3367890123",
+  "fechaRegistro" : [ 2025, 4, 22 ],
+  "multasPendientes" : 0.0,
+  "investigadorAutorizado" : false,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-46802",
+  "nombre" : "GABRIELA ORTIZ LUNA",
+  "correoElectronico" : "GABRIELA.ORTIZ@ITESO.MX",
+  "telefono" : "+52-3378901234",
+  "fechaRegistro" : [ 2025, 3, 7 ],
+  "multasPendientes" : 12.4,
+  "investigadorAutorizado" : true,
   "nivelPermiso" : "CONSULTA"
 } ]
