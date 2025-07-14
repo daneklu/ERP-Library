@@ -3,7 +3,34 @@
   "nombre" : "JUAN LOPEZ",
   "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
   "telefono" : "3325767021",
-  "fechaRegistro" : [ 2025, 7, 13 ],
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "multasPendientes" : 0.0,
+  "investigadorAutorizado" : false,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "12345",
+  "nombre" : "JUAN LOPEZ",
+  "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
+  "telefono" : "3325767021",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "multasPendientes" : 0.0,
+  "investigadorAutorizado" : false,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "12345",
+  "nombre" : "JUAN LOPEZ",
+  "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
+  "telefono" : "3325767021",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "multasPendientes" : 0.0,
+  "investigadorAutorizado" : false,
+  "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "12345",
+  "nombre" : "JUAN LOPEZ",
+  "correoElectronico" : "JUAN.LOPEZ@ITESO.MX",
+  "telefono" : "3325767021",
+  "fechaRegistro" : [ 2025, 7, 14 ],
   "multasPendientes" : 0.0,
   "investigadorAutorizado" : false,
   "nivelPermiso" : "CONSULTA"

@@ -78,14 +78,12 @@ public class MainFrame extends JFrame {
 	private JTextField textField_26;
 	private JTextField textField_27;
 	private JTextField textField_28;
-	private JTextField textField_29;
 	private JTextField textField_32;
 	private JTextField textField_33;
 	private JTextField textField_34;
 	private JTextField txtRev;
 	private JTextField textField_18;
 	private JTextField textField_19;
-	private JTextField textField_20;
 	private JTextField textField_21;
 	private JTextField textField_22;
 	private JTextField textField_30;
@@ -94,7 +92,6 @@ public class MainFrame extends JFrame {
 	private JTextField txtLib;
 	private JTextField textField_5;
 	private JTextField textField_13;
-	private JTextField textField_14;
 	private JTextField textField_16;
 	private JTextField textField_31;
 	private JTextField textField_37;
@@ -124,6 +121,9 @@ public class MainFrame extends JFrame {
 	private JTable tableHistorialPrestamos;
 	private JTextField textField_50;
 	private JTable table;
+	private JTextField textField_3;
+	private JTextField textField_10;
+	private JTextField textField_14;
 
 	public MainFrame() {
 		setIconImage(Toolkit.getDefaultToolkit()
@@ -414,6 +414,7 @@ public class MainFrame extends JFrame {
 		panel_9_5_3.add(scrollBar_11, BorderLayout.SOUTH);
 
 		tableArticuloN = new JTable();
+		tableArticuloN.setEnabled(false);
 		panel_9_5_3.add(tableArticuloN, BorderLayout.CENTER);
 
 		JPanel pnlBuscarPorCodigo = new JPanel();
@@ -451,6 +452,7 @@ public class MainFrame extends JFrame {
 		panel_9_5_3_1.add(scrollBar_13, BorderLayout.SOUTH);
 
 		tableArticuloID = new JTable();
+		tableArticuloID.setEnabled(false);
 		panel_9_5_3_1.add(tableArticuloID, BorderLayout.CENTER);
 
 		JPanel pnlAgregarLibro = new JPanel();
@@ -538,17 +540,10 @@ public class MainFrame extends JFrame {
 		chckbxNewCheckBox_1_2_2_1.setBounds(31, 357, 179, 23);
 		panel_8_2_1_2_1_1.add(chckbxNewCheckBox_1_2_2_1);
 
-		JLabel lblNewLabel_25_3_1 = new JLabel("Idioma Falta ENUM");
+		JLabel lblNewLabel_25_3_1 = new JLabel("Idioma");
 		lblNewLabel_25_3_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_25_3_1.setBounds(31, 278, 227, 17);
 		panel_8_2_1_2_1_1.add(lblNewLabel_25_3_1);
-
-		textField_14 = new JTextField();
-		textField_14.setForeground(Color.BLACK);
-		textField_14.setFont(new Font("Roboto", Font.PLAIN, 12));
-		textField_14.setColumns(10);
-		textField_14.setBounds(31, 305, 227, 21);
-		panel_8_2_1_2_1_1.add(textField_14);
 
 		textField_16 = new JTextField();
 		textField_16.setForeground(Color.BLACK);
@@ -587,12 +582,14 @@ public class MainFrame extends JFrame {
 		textField_37.setBounds(268, 197, 224, 21);
 		panel_8_2_1_2_1_1.add(textField_37);
 
-		JLabel lblNewLabel_33_2_1_2_1_1_1 = new JLabel("Condición del Libro FALTA ENUM");
+		JLabel lblNewLabel_33_2_1_2_1_1_1 = new JLabel("Condición del Libro");
 		lblNewLabel_33_2_1_2_1_1_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_33_2_1_2_1_1_1.setBounds(268, 224, 227, 17);
 		panel_8_2_1_2_1_1.add(lblNewLabel_33_2_1_2_1_1_1);
 
 		JComboBox comboBox_2_2 = new JComboBox();
+		comboBox_2_2.setModel(new DefaultComboBoxModel(Estado.values()));
+		comboBox_2_2.setFont(new Font("Roboto", Font.PLAIN, 10));
 		comboBox_2_2.setBounds(268, 252, 224, 20);
 		panel_8_2_1_2_1_1.add(comboBox_2_2);
 
@@ -618,7 +615,7 @@ public class MainFrame extends JFrame {
 		chckbxNewCheckBox_1_2_1_1_1.setBounds(268, 357, 125, 23);
 		panel_8_2_1_2_1_1.add(chckbxNewCheckBox_1_2_1_1_1);
 
-		JLabel lblNewLabel_32_2_1_2_3_1_1 = new JLabel("Género FALTA ENUM");
+		JLabel lblNewLabel_32_2_1_2_3_1_1 = new JLabel("Género");
 		lblNewLabel_32_2_1_2_3_1_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_32_2_1_2_3_1_1.setBounds(31, 388, 227, 17);
 		panel_8_2_1_2_1_1.add(lblNewLabel_32_2_1_2_3_1_1);
@@ -629,6 +626,7 @@ public class MainFrame extends JFrame {
 		panel_8_2_1_2_1_1.add(btnNewButton_2_2_2_1_1);
 
 		JComboBox comboBox_2_1_1 = new JComboBox();
+		comboBox_2_1_1.setModel(new DefaultComboBoxModel(Genero.values()));
 		comboBox_2_1_1.setBounds(31, 415, 227, 20);
 		panel_8_2_1_2_1_1.add(comboBox_2_1_1);
 
@@ -643,6 +641,11 @@ public class MainFrame extends JFrame {
 		textField_15.setColumns(10);
 		textField_15.setBounds(31, 89, 461, 21);
 		panel_8_2_1_2_1_1.add(textField_15);
+
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setModel(new DefaultComboBoxModel(Idioma.values()));
+		comboBox_3.setBounds(31, 301, 227, 21);
+		panel_8_2_1_2_1_1.add(comboBox_3);
 
 		JPanel pnlEliminarArticulo = new JPanel();
 		pnlEliminarArticulo.setOpaque(false);
@@ -679,6 +682,7 @@ public class MainFrame extends JFrame {
 		panel_9_5_3_1_1.add(scrollBar_15, BorderLayout.SOUTH);
 
 		tableArticuloElim = new JTable();
+		tableArticuloElim.setEnabled(false);
 		panel_9_5_3_1_1.add(tableArticuloElim, BorderLayout.CENTER);
 
 		JPanel pnlAgregarRevista = new JPanel();
@@ -766,17 +770,10 @@ public class MainFrame extends JFrame {
 		chckbxNewCheckBox_1_2_2.setBounds(31, 303, 179, 23);
 		panel_8_2_1_2_1.add(chckbxNewCheckBox_1_2_2);
 
-		JLabel lblNewLabel_25_3 = new JLabel("Idioma Falta ENUM");
+		JLabel lblNewLabel_25_3 = new JLabel("Idioma");
 		lblNewLabel_25_3.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_25_3.setBounds(31, 224, 217, 17);
 		panel_8_2_1_2_1.add(lblNewLabel_25_3);
-
-		textField_20 = new JTextField();
-		textField_20.setForeground(Color.BLACK);
-		textField_20.setFont(new Font("Roboto", Font.PLAIN, 12));
-		textField_20.setColumns(10);
-		textField_20.setBounds(31, 249, 227, 21);
-		panel_8_2_1_2_1.add(textField_20);
 
 		JLabel lblNewLabel_33_2_1_2_5_2 = new JLabel("Número de Edición");
 		lblNewLabel_33_2_1_2_5_2.setFont(new Font("Roboto", Font.BOLD, 14));
@@ -838,12 +835,13 @@ public class MainFrame extends JFrame {
 		textField_35.setBounds(268, 141, 228, 21);
 		panel_8_2_1_2_1.add(textField_35);
 
-		JLabel lblNewLabel_33_2_1_2_1_1 = new JLabel("Condición del Periódico FALTA ENUM");
+		JLabel lblNewLabel_33_2_1_2_1_1 = new JLabel("Condición del Periódico");
 		lblNewLabel_33_2_1_2_1_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_33_2_1_2_1_1.setBounds(268, 170, 227, 17);
 		panel_8_2_1_2_1.add(lblNewLabel_33_2_1_2_1_1);
 
 		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setModel(new DefaultComboBoxModel(Estado.values()));
 		comboBox_2.setBounds(268, 195, 227, 20);
 		panel_8_2_1_2_1.add(comboBox_2);
 
@@ -869,7 +867,7 @@ public class MainFrame extends JFrame {
 		chckbxNewCheckBox_1_2_1_1.setBounds(268, 302, 125, 23);
 		panel_8_2_1_2_1.add(chckbxNewCheckBox_1_2_1_1);
 
-		JLabel lblNewLabel_32_2_1_2_3_1 = new JLabel("Temática FALTA ENUM");
+		JLabel lblNewLabel_32_2_1_2_3_1 = new JLabel("Temática");
 		lblNewLabel_32_2_1_2_3_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_32_2_1_2_3_1.setBounds(268, 333, 227, 17);
 		panel_8_2_1_2_1.add(lblNewLabel_32_2_1_2_3_1);
@@ -880,8 +878,14 @@ public class MainFrame extends JFrame {
 		panel_8_2_1_2_1.add(btnNewButton_2_2_2_1);
 
 		JComboBox comboBox_2_1 = new JComboBox();
+		comboBox_2_1.setModel(new DefaultComboBoxModel(TematicaRevista.values()));
 		comboBox_2_1.setBounds(268, 358, 227, 20);
 		panel_8_2_1_2_1.add(comboBox_2_1);
+
+		JComboBox comboBox_4 = new JComboBox();
+		comboBox_4.setModel(new DefaultComboBoxModel(Idioma.values()));
+		comboBox_4.setBounds(31, 247, 227, 21);
+		panel_8_2_1_2_1.add(comboBox_4);
 
 		JPanel pnlAgregarPeriodico = new JPanel();
 		pnlAgregarPeriodico.setLayout(null);
@@ -1010,12 +1014,13 @@ public class MainFrame extends JFrame {
 		chckbxNewCheckBox_1_2.setBounds(28, 303, 179, 23);
 		panel_8_2_1_2.add(chckbxNewCheckBox_1_2);
 
-		JLabel lblNewLabel_33_2_1_2_1 = new JLabel("Condición del Periódico FALTA ENUM");
+		JLabel lblNewLabel_33_2_1_2_1 = new JLabel("Condición del Periódico");
 		lblNewLabel_33_2_1_2_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_33_2_1_2_1.setBounds(268, 170, 227, 17);
 		panel_8_2_1_2.add(lblNewLabel_33_2_1_2_1);
 
 		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(Estado.values()));
 		comboBox.setBounds(268, 195, 227, 20);
 		panel_8_2_1_2.add(comboBox);
 
@@ -1029,17 +1034,10 @@ public class MainFrame extends JFrame {
 		chckbxNewCheckBox_1_2_1.setBounds(267, 302, 228, 23);
 		panel_8_2_1_2.add(chckbxNewCheckBox_1_2_1);
 
-		JLabel lblNewLabel_25 = new JLabel("Idioma Falta ENUM");
+		JLabel lblNewLabel_25 = new JLabel("Idioma");
 		lblNewLabel_25.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_25.setBounds(31, 224, 227, 17);
 		panel_8_2_1_2.add(lblNewLabel_25);
-
-		textField_29 = new JTextField();
-		textField_29.setForeground(Color.BLACK);
-		textField_29.setFont(new Font("Roboto", Font.PLAIN, 12));
-		textField_29.setColumns(10);
-		textField_29.setBounds(31, 249, 227, 21);
-		panel_8_2_1_2.add(textField_29);
 
 		JLabel lblNewLabel_26 = new JLabel("ISSN");
 		lblNewLabel_26.setFont(new Font("Roboto", Font.BOLD, 14));
@@ -1088,6 +1086,11 @@ public class MainFrame extends JFrame {
 				Calendar.YEAR));
 		spinner.setBounds(31, 413, 244, 24);
 		panel_8_2_1_2.add(spinner);
+
+		JComboBox comboBox_5 = new JComboBox();
+		comboBox_5.setModel(new DefaultComboBoxModel(Idioma.values()));
+		comboBox_5.setBounds(28, 247, 227, 21);
+		panel_8_2_1_2.add(comboBox_5);
 
 		JPanel pnlPrestamos = new JPanel();
 		pnlPrestamos.setBackground(new Color(247, 203, 164, 120));
@@ -1171,6 +1174,7 @@ public class MainFrame extends JFrame {
 		panel_prestamo.add(scrollBar_17, BorderLayout.SOUTH);
 
 		tablePrestamoActivo = new JTable();
+		tablePrestamoActivo.setEnabled(false);
 		panel_prestamo.add(tablePrestamoActivo, BorderLayout.CENTER);
 
 		JPanel pnlHistorialPrestamos = new JPanel();
@@ -1206,11 +1210,95 @@ public class MainFrame extends JFrame {
 		panel_prestamo_1.add(scrollBar_19, BorderLayout.SOUTH);
 
 		tableHistorialPrestamos = new JTable();
+		tableHistorialPrestamos.setEnabled(false);
 		panel_prestamo_1.add(tableHistorialPrestamos, BorderLayout.CENTER);
 
 		JPanel pnlGenerarPrestamo = new JPanel();
+		pnlGenerarPrestamo.setOpaque(false);
 		pnlGenerarPrestamo.setBackground(Color.ORANGE);
 		prestamosCardLayout.add(pnlGenerarPrestamo, "generarPrestamo");
+		pnlGenerarPrestamo.setLayout(null);
+
+		JPanel pnlFormularioLibro_1 = new JPanel();
+		pnlFormularioLibro_1.setBackground(new Color(247, 203, 164, 200));
+		pnlFormularioLibro_1.setBounds(218, 10, 525, 506);
+		pnlGenerarPrestamo.add(pnlFormularioLibro_1);
+		pnlFormularioLibro_1.setLayout(new BorderLayout(0, 0));
+
+		JPanel panel_7_2_1_3 = new JPanel();
+		panel_7_2_1_3.setOpaque(false);
+		pnlFormularioLibro_1.add(panel_7_2_1_3, BorderLayout.NORTH);
+		panel_7_2_1_3.setLayout(new BorderLayout(0, 0));
+
+		JLabel lblNewLabel_32 = new JLabel("Registrar Préstamo");
+		lblNewLabel_32.setLocation(1, 10);
+		lblNewLabel_32.setFont(new Font("Roboto", Font.BOLD, 18));
+		lblNewLabel_32.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_7_2_1_3.add(lblNewLabel_32, BorderLayout.CENTER);
+
+		JPanel panel_11 = new JPanel();
+		panel_11.setOpaque(false);
+		panel_7_2_1_3.add(panel_11, BorderLayout.NORTH);
+
+		JLabel lblNewLabel_33 = new JLabel("Para registrar el préstamo llene todos los campos del formulario");
+		lblNewLabel_33.setFont(new Font("Roboto", Font.PLAIN, 15));
+		lblNewLabel_33.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_7_2_1_3.add(lblNewLabel_33, BorderLayout.SOUTH);
+
+		JPanel panel_12 = new JPanel();
+		panel_12.setOpaque(false);
+		pnlFormularioLibro_1.add(panel_12, BorderLayout.CENTER);
+		panel_12.setLayout(null);
+
+		textField_3 = new JTextField();
+		textField_3.setBounds(10, 95, 407, 19);
+		panel_12.add(textField_3);
+		textField_3.setColumns(10);
+
+		JLabel lblNewLabel_35 = new JLabel("Ingrese ID del usuario");
+		lblNewLabel_35.setFont(new Font("Roboto", Font.PLAIN, 16));
+		lblNewLabel_35.setBounds(10, 180, 154, 19);
+		panel_12.add(lblNewLabel_35);
+
+		textField_10 = new JTextField();
+		textField_10.setBounds(10, 209, 407, 19);
+		panel_12.add(textField_10);
+		textField_10.setColumns(10);
+
+		JLabel lblNewLabel_36 = new JLabel("Ingrese su ID");
+		lblNewLabel_36.setFont(new Font("Roboto", Font.PLAIN, 16));
+		lblNewLabel_36.setBounds(10, 294, 92, 19);
+		panel_12.add(lblNewLabel_36);
+
+		textField_14 = new JTextField();
+		textField_14.setBounds(10, 323, 407, 19);
+		panel_12.add(textField_14);
+		textField_14.setColumns(10);
+
+		JButton btnNewButton_6 = new JButton("Buscar");
+		btnNewButton_6.setFont(new Font("Roboto", Font.PLAIN, 14));
+		btnNewButton_6.setBounds(427, 94, 85, 21);
+		panel_12.add(btnNewButton_6);
+
+		JButton btnNewButton_7 = new JButton("Buscar");
+		btnNewButton_7.setFont(new Font("Roboto", Font.PLAIN, 14));
+		btnNewButton_7.setBounds(427, 208, 85, 21);
+		panel_12.add(btnNewButton_7);
+
+		JButton btnNewButton_8 = new JButton("Confirmar");
+		btnNewButton_8.setFont(new Font("Roboto", Font.PLAIN, 14));
+		btnNewButton_8.setBounds(217, 380, 112, 33);
+		panel_12.add(btnNewButton_8);
+
+		JLabel lblNewLabel_34 = new JLabel("Ingrese ID del artículo a préstar");
+		lblNewLabel_34.setBounds(10, 64, 222, 19);
+		panel_12.add(lblNewLabel_34);
+		lblNewLabel_34.setFont(new Font("Roboto", Font.PLAIN, 16));
+
+		JButton btnNewButton_8_1 = new JButton("Buscar");
+		btnNewButton_8_1.setFont(new Font("Roboto", Font.PLAIN, 14));
+		btnNewButton_8_1.setBounds(427, 322, 85, 21);
+		panel_12.add(btnNewButton_8_1);
 
 		JPanel pnlModificarPrestamo = new JPanel();
 		pnlModificarPrestamo.setOpaque(false);
@@ -1245,6 +1333,7 @@ public class MainFrame extends JFrame {
 		panel_prestamo_1_1.add(scrollBar_21, BorderLayout.SOUTH);
 
 		table = new JTable();
+		table.setEnabled(false);
 		panel_prestamo_1_1.add(table, BorderLayout.CENTER);
 
 		JPanel pnlUsuarios = new JPanel();
@@ -1313,6 +1402,7 @@ public class MainFrame extends JFrame {
 		panel_9_5.add(scrollBar_5, BorderLayout.SOUTH);
 
 		tableUsuariosN = new JTable();
+		tableUsuariosN.setEnabled(false);
 		DefaultTableModel modelUsuarios = new DefaultTableModel(new Object[][] {}, new String[] { "Credencial",
 				"Nombre", "Correo", "Telefono", "Multas", "Investigador Autorizado", "Permiso" }) {
 			Class[] columnTypes = new Class[] { String.class, String.class, String.class, Object.class, Double.class,
@@ -1381,6 +1471,7 @@ public class MainFrame extends JFrame {
 		panel_9_5_1.add(scrollBar_7, BorderLayout.SOUTH);
 
 		tableUsuariosID = new JTable();
+		tableUsuariosID.setEnabled(false);
 		tableUsuariosID.setModel(modelUsuarios);
 		panel_9_5_1.add(tableUsuariosID, BorderLayout.CENTER);
 
@@ -1545,6 +1636,7 @@ public class MainFrame extends JFrame {
 		panel_9_5_2.add(scrollBar_9, BorderLayout.SOUTH);
 
 		tableUsuariosElim = new JTable();
+		tableUsuariosElim.setEnabled(false);
 		tableUsuariosElim.setModel(modelUsuarios);
 		panel_9_5_2.add(tableUsuariosElim, BorderLayout.CENTER);
 

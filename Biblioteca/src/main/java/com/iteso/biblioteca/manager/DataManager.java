@@ -1,5 +1,6 @@
 package com.iteso.biblioteca.manager;
 
+import com.iteso.biblioteca.model.Articulo;
 import com.iteso.biblioteca.model.Empleado;
 import com.iteso.biblioteca.model.Prestamo;
 import com.iteso.biblioteca.model.Usuario;
@@ -12,10 +13,12 @@ public class DataManager {
 	private static final String USUARIOS_JSON = "usuarios.json";
 	private static final String PRESTAMOS_ACTIVOS_JSON = "prestamos_activos.json";
 	private static final String HISTORIAL_PRESTAMOS_JSON = "historial_prestamos.json";
-
+	private static final String INVENTARIO_JSON = "inventario.json";
+	
 	// Listas de datos como ArrayList
 	private final ArrayList<Empleado> personal;
 	private final ArrayList<Usuario> usuarios;
+	private final ArrayList<Articulo> inventario;
 	private final ArrayList<Prestamo> prestamosActivos;
 	private final ArrayList<Prestamo> historialPrestamos;
 
@@ -27,6 +30,7 @@ public class DataManager {
 		usuarios = cargarDatos(USUARIOS_JSON, Usuario.class);
 		prestamosActivos = cargarDatos(PRESTAMOS_ACTIVOS_JSON, Prestamo.class);
 		historialPrestamos = cargarDatos(HISTORIAL_PRESTAMOS_JSON, Prestamo.class);
+		inventario = cargarDatosArticulos(INVENTARIO_JSON);
 	}
 
 	public static synchronized DataManager getInstance() {
@@ -41,6 +45,10 @@ public class DataManager {
 		ArrayList<T> datos = JsonManager.cargarListaDesdeArchivo(filePath, type);
 		return datos != null ? datos : new ArrayList<>();
 	}
+	
+	private ArrayList<Articulo> cargarDatosArticulos(String filePath) {
+        return JsonManager.cargarListaArticulosDesdeArchivo(filePath);
+    }
 
 	// Guardar todos los datos
 	public void guardarTodo() {
@@ -48,6 +56,8 @@ public class DataManager {
 		JsonManager.guardarEnArchivo(USUARIOS_JSON, usuarios);
 		JsonManager.guardarEnArchivo(PRESTAMOS_ACTIVOS_JSON, prestamosActivos);
 		JsonManager.guardarEnArchivo(HISTORIAL_PRESTAMOS_JSON, historialPrestamos);
+		JsonManager.guardarListaArticulos(INVENTARIO_JSON, inventario);
+
 	}
 
 	// Métodos de acceso a las listas (ArrayList directo)
@@ -65,6 +75,10 @@ public class DataManager {
 
 	public ArrayList<Prestamo> getHistorialPrestamos() {
 		return historialPrestamos;
+	}
+	
+	public ArrayList<Articulo> getInventario(){
+		return inventario;
 	}
 
 	// Métodos para agregar elementos con persistencia automática
@@ -86,6 +100,11 @@ public class DataManager {
 	public void agregarPrestamoHistorial(Prestamo prestamo) {
 		historialPrestamos.add(prestamo);
 		JsonManager.guardarEnArchivo(HISTORIAL_PRESTAMOS_JSON, historialPrestamos);
+	}
+	
+	public void agregarInventario(Articulo articulo) {
+		inventario.add(articulo);
+		JsonManager.guardarListaArticulos(INVENTARIO_JSON, inventario);
 	}
 
 	// Método para registrar el cierre

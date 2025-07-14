@@ -2,6 +2,7 @@ package com.iteso.biblioteca.model;
 
 import java.time.LocalDate;
 import com.iteso.biblioteca.enums.EstadoPrestamo;
+import com.iteso.biblioteca.enums.Estado;
 
 public class Prestamo {
 	private String idPrestamo;
@@ -66,12 +67,11 @@ public class Prestamo {
 			long diasVencimiento = fechaVencimiento.toEpochDay();
 			long diasRetraso = diasDevolucion - diasVencimiento;
 			if (diasRetraso > 0) {
-				multa += diasRetraso * articulo.getCostoMultaDiaria(); // Debe adaptarse a como este estructurada la
-																		// clase articulo
+				multa += diasRetraso * articulo.getCostoMultaDiaria();
 			}
 		}
 		if (dañado) {
-			multa += articulo.getCostoReparacion(); // Debe adaptarse a la clase articulo
+			multa += articulo.getCostoReparacion();
 		}
 		this.multaGenerada = multa;
 		usuario.setMultasPendientes(usuario.getMultasPendientes() + multa);
@@ -84,8 +84,7 @@ public class Prestamo {
 			CalcularMulta(dañado, conRetraso);
 		}
 		if (dañado) {
-			articulo.setEstado(Estado.DETERIORADO);// Depende como este hecha la clase
-			// Articulo y el enum, esta linea debe adaptarse
+			articulo.setEstado(Estado.DETERIORADO);
 			setEstadoPrestamo(EstadoPrestamo.DEVUELTO_DAÑADO);
 		} else if (conRetraso) {
 			setEstadoPrestamo(EstadoPrestamo.DEVUELTO_CON_RETRASO);
@@ -95,29 +94,40 @@ public class Prestamo {
 
 	}
 
-	// Falta la clase articulo
+	public String getIdPrestamo() {
+		return idPrestamo;
+	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("{\"idPrestamo\":\"");
-		builder.append(idPrestamo);
-		builder.append("\", \"empleadoRegistrador\":\"");
-		builder.append(empleadoRegistrador);
-		builder.append("\", \"usuario\":\"");
-		builder.append(usuario);
-		builder.append("\", \"fechaPrestamo\":\"");
-		builder.append(fechaPrestamo);
-		builder.append("\", \"fechaVencimiento\":\"");
-		builder.append(fechaVencimiento);
-		builder.append("\", \"fechaDevolucion\":\"");
-		builder.append(fechaDevolucion);
-		builder.append("\", \"estado\":\"");
-		builder.append(estado);
-		builder.append("\", \"multaGenerada\":");
-		builder.append(multaGenerada);
-		builder.append("}");
-		return builder.toString();
+	public Articulo getArticulo() {
+		return articulo;
+	}
+
+	public Empleado getEmpleadoRegistrador() {
+		return empleadoRegistrador;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public LocalDate getFechaPrestamo() {
+		return fechaPrestamo;
+	}
+
+	public LocalDate getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+	public LocalDate getFechaDevolucion() {
+		return fechaDevolucion;
+	}
+
+	public EstadoPrestamo getEstado() {
+		return estado;
+	}
+
+	public double getMultaGenerada() {
+		return multaGenerada;
 	}
 
 }
