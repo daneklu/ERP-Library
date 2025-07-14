@@ -3,7 +3,8 @@
   "nombre" : "MARIA ANTON",
   "correoElectronico" : "M.ANTON@ITESO.MX",
   "telefono" : "6315357524",
-  "fechaRegistro" : [ 2025, 7, 5 ],
+  "fechaRegistro" : [ 2025, 7, 13 ],
+  "puesto" : "ADMINISTRADOR_SISTEMAS",
   "departamento" : "TECNOLOGIA",
   "nivelPermiso" : "ADMIN"
 }, {
@@ -11,7 +12,8 @@
   "nombre" : "MRTIA ANTY",
   "correoElectronico" : "M.AON@ITESO.MX",
   "telefono" : "4315354564",
-  "fechaRegistro" : [ 2025, 7, 5 ],
+  "fechaRegistro" : [ 2025, 7, 13 ],
+  "puesto" : "RESTAURADOR",
   "departamento" : "HISTORICOS",
   "nivelPermiso" : "ALTO"
 }, {
@@ -19,7 +21,8 @@
   "nombre" : "ARIA SANTON",
   "correoElectronico" : "MANT.N@ITESO.MX",
   "telefono" : "9323657524",
-  "fechaRegistro" : [ 2025, 7, 5 ],
+  "fechaRegistro" : [ 2025, 7, 13 ],
+  "puesto" : "ASISTENTE_BIBLIOTECA",
   "departamento" : "ATENCION_PUBLICO",
   "nivelPermiso" : "BAJO"
 } ]

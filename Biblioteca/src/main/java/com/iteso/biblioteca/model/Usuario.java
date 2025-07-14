@@ -5,6 +5,7 @@ import com.iteso.biblioteca.enums.Permiso;
 public class Usuario extends Persona {
 	private double multasPendientes;
 	private boolean investigadorAutorizado;
+	private Permiso nivelPermiso = Permiso.CONSULTA;
 
 	public Usuario() {
 	}
@@ -33,7 +34,7 @@ public class Usuario extends Persona {
 
 	@Override
 	public Permiso getNivelPermiso() {
-		return Permiso.CONSULTA;
+		return nivelPermiso;
 	}
 
 	@Override
