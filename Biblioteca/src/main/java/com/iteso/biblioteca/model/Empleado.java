@@ -87,6 +87,10 @@ public class Empleado extends Persona {
 		return (nivelPermiso == Permiso.ALTO || nivelPermiso == Permiso.ADMIN);
 	}
 
+	public Puesto getPuesto() {
+		return puesto;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

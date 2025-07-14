@@ -1,25 +1,91 @@
 [ {
-  "numeroCredencial" : "123456",
-  "nombre" : "MARIA ANTON",
-  "correoElectronico" : "M.ANTON@ITESO.MX",
-  "telefono" : "6315357524",
-  "fechaRegistro" : [ 2025, 7, 5 ],
+  "numeroCredencial" : "EMP-10001",
+  "nombre" : "MARÍA GARCÍA LÓPEZ",
+  "correoElectronico" : "M.GARCIA@ITESO.MX",
+  "telefono" : "+52-3312345678",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "ADMINISTRADOR_SISTEMAS",
   "departamento" : "TECNOLOGIA",
   "nivelPermiso" : "ADMIN"
 }, {
-  "numeroCredencial" : "78910",
-  "nombre" : "MRTIA ANTY",
-  "correoElectronico" : "M.AON@ITESO.MX",
-  "telefono" : "4315354564",
-  "fechaRegistro" : [ 2025, 7, 5 ],
+  "numeroCredencial" : "EMP-10002",
+  "nombre" : "JUAN MARTÍNEZ RODRÍGUEZ",
+  "correoElectronico" : "J.MARTINEZ@ITESO.MX",
+  "telefono" : "+52-3323456789",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "ASISTENTE_BIBLIOTECA",
+  "departamento" : "ATENCION_PUBLICO",
+  "nivelPermiso" : "BAJO"
+}, {
+  "numeroCredencial" : "EMP-10003",
+  "nombre" : "ANA HERNÁNDEZ SÁNCHEZ",
+  "correoElectronico" : "A.HERNANDEZ@ITESO.MX",
+  "telefono" : "+52-3334567890",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "BIBLIOTECARIO",
+  "departamento" : "ATENCION_PUBLICO",
+  "nivelPermiso" : "MEDIO"
+}, {
+  "numeroCredencial" : "EMP-10004",
+  "nombre" : "CARLOS DÍAZ PÉREZ",
+  "correoElectronico" : "C.DIAZ@ITESO.MX",
+  "telefono" : "+52-3345678901",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "REFERENCIA",
+  "departamento" : "ATENCION_PUBLICO",
+  "nivelPermiso" : "MEDIO"
+}, {
+  "numeroCredencial" : "EMP-10005",
+  "nombre" : "SOFÍA RUIZ GÓMEZ",
+  "correoElectronico" : "S.RUIZ@ITESO.MX",
+  "telefono" : "+52-3356789012",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "CATALOGADOR",
+  "departamento" : "ADQUISICIONES",
+  "nivelPermiso" : "ALTO"
+}, {
+  "numeroCredencial" : "EMP-10006",
+  "nombre" : "MIGUEL ÁLVAREZ FERNÁNDEZ",
+  "correoElectronico" : "M.ALVAREZ@ITESO.MX",
+  "telefono" : "+52-3367890123",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "CONSERVADOR",
   "departamento" : "HISTORICOS",
   "nivelPermiso" : "ALTO"
 }, {
-  "numeroCredencial" : "1238956",
-  "nombre" : "ARIA SANTON",
-  "correoElectronico" : "MANT.N@ITESO.MX",
-  "telefono" : "9323657524",
-  "fechaRegistro" : [ 2025, 7, 5 ],
-  "departamento" : "ATENCION_PUBLICO",
-  "nivelPermiso" : "BAJO"
+  "numeroCredencial" : "EMP-10007",
+  "nombre" : "ELENA CASTRO MORENO",
+  "correoElectronico" : "E.CASTRO@ITESO.MX",
+  "telefono" : "+52-3378901234",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "RESTAURADOR",
+  "departamento" : "HISTORICOS",
+  "nivelPermiso" : "ALTO"
+}, {
+  "numeroCredencial" : "EMP-10008",
+  "nombre" : "PEDRO ORTIZ JIMÉNEZ",
+  "correoElectronico" : "P.ORTIZ@ITESO.MX",
+  "telefono" : "+52-3389012345",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "ARCHIVISTA",
+  "departamento" : "HISTORICOS",
+  "nivelPermiso" : "ALTO"
+}, {
+  "numeroCredencial" : "EMP-10009",
+  "nombre" : "LAURA SANTOS VARGAS",
+  "correoElectronico" : "L.SANTOS@ITESO.MX",
+  "telefono" : "+52-3390123456",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "SUPERVISOR",
+  "departamento" : "ADMINISTRACION",
+  "nivelPermiso" : "ADMIN"
+}, {
+  "numeroCredencial" : "EMP-10010",
+  "nombre" : "ANDRÉS MEDINA ROMERO",
+  "correoElectronico" : "A.MEDINA@ITESO.MX",
+  "telefono" : "+52-3301234567",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "DIRECTOR",
+  "departamento" : "ADMINISTRACION",
+  "nivelPermiso" : "ADMIN"
 } ]
