@@ -18,9 +18,11 @@ import java.awt.Component;
 import javax.swing.SwingConstants;
 
 import com.iteso.biblioteca.manager.DataManager;
+import com.iteso.biblioteca.model.Articulo;
 import com.iteso.biblioteca.model.Empleado;
 import com.iteso.biblioteca.model.Libro;
 import com.iteso.biblioteca.model.Periodico;
+import com.iteso.biblioteca.model.Prestamo;
 import com.iteso.biblioteca.model.Revista;
 import com.iteso.biblioteca.model.Usuario;
 import com.iteso.biblioteca.enums.*;
@@ -60,8 +62,6 @@ import javax.swing.JSlider;
 public class MainFrame extends JFrame {
 
 	DataManager dataManager = DataManager.getInstance();
-	ArrayList<Empleado> personal = dataManager.getPersonal();
-	ArrayList<Usuario> usuarios = dataManager.getUsuarios();
 
 	private static final long serialVersionUID = 1L;
 	private JPanel backGround;
@@ -422,6 +422,40 @@ public class MainFrame extends JFrame {
 
 		tableArticuloN = new JTable();
 		tableArticuloN.setEnabled(false);
+
+		DefaultTableModel modelArticulos = new DefaultTableModel(new Object[][] {},
+				new String[] { "Código", "Título", "Tipo", "Año", "Editorial", "Disponible", "Detalle Específico" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class, String.class, Integer.class, String.class,
+					String.class, String.class };
+
+			@Override
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		};
+
+		for (Articulo articulo : dataManager.getInventario()) {
+			String tipo = "";
+			String detalle = "";
+
+			if (articulo instanceof Libro) {
+				tipo = "Libro";
+				detalle = "Autor: " + ((Libro) articulo).getAutor();
+			} else if (articulo instanceof Revista) {
+				tipo = "Revista";
+				detalle = "Temática: " + ((Revista) articulo).getTematica();
+			} else if (articulo instanceof Periodico) {
+				tipo = "Periódico";
+				detalle = "Sección: " + ((Periodico) articulo).getSeccionPrincipal();
+			}
+
+			modelArticulos.addRow(
+					new Object[] { articulo.getCodigo(), articulo.getTitulo(), tipo, articulo.getAñoPublicacion(),
+							articulo.getEditorial(), articulo.isDisponible() ? "Sí" : "No", detalle });
+		}
+
+		tableArticuloN.setModel(modelArticulos);
+
 		panel_9_5_3.add(tableArticuloN, BorderLayout.CENTER);
 
 		JPanel pnlBuscarPorCodigo = new JPanel();
@@ -460,6 +494,8 @@ public class MainFrame extends JFrame {
 
 		tableArticuloID = new JTable();
 		tableArticuloID.setEnabled(false);
+
+		tableArticuloID.setModel(modelArticulos);
 		panel_9_5_3_1.add(tableArticuloID, BorderLayout.CENTER);
 
 		JPanel pnlAgregarLibro = new JPanel();
@@ -746,6 +782,7 @@ public class MainFrame extends JFrame {
 
 		tableArticuloElim = new JTable();
 		tableArticuloElim.setEnabled(false);
+		tableArticuloElim.setModel(modelArticulos);
 		panel_9_5_3_1_1.add(tableArticuloElim, BorderLayout.CENTER);
 
 		JPanel pnlAgregarRevista = new JPanel();
@@ -1125,12 +1162,12 @@ public class MainFrame extends JFrame {
 		textField_28.setColumns(10);
 		textField_28.setBounds(267, 248, 228, 21);
 		panel_8_2_1_2.add(textField_28);
-		
+
 		JCheckBox chckbxNewCheckBox_1_2 = new JCheckBox("Disponible para prestamo");
 		chckbxNewCheckBox_1_2.setFont(new Font("Roboto", Font.BOLD, 12));
 		chckbxNewCheckBox_1_2.setBounds(28, 303, 179, 23);
 		panel_8_2_1_2.add(chckbxNewCheckBox_1_2);
-		
+
 		JCheckBox chckbxNewCheckBox_1_2_1 = new JCheckBox("Artículo de valor histórico");
 		chckbxNewCheckBox_1_2_1.setFont(new Font("Roboto", Font.BOLD, 12));
 		chckbxNewCheckBox_1_2_1.setBounds(267, 302, 228, 23);
@@ -1139,14 +1176,14 @@ public class MainFrame extends JFrame {
 		comboBox.setModel(new DefaultComboBoxModel(Estado.values()));
 		comboBox.setBounds(268, 195, 227, 20);
 		panel_8_2_1_2.add(comboBox);
-		
+
 		JSpinner spinner = new JSpinner();
 		spinner.setFont(new Font("Roboto", Font.PLAIN, 14));
 		spinner.setModel(new SpinnerDateModel(new Date(946706400000L), new Date(21600000L), new Date(1752300000000L),
 				Calendar.YEAR));
 		spinner.setBounds(31, 413, 244, 24);
 		panel_8_2_1_2.add(spinner);
-		
+
 		JComboBox comboBox_5 = new JComboBox();
 		comboBox_5.setModel(new DefaultComboBoxModel(Idioma.values()));
 		comboBox_5.setBounds(28, 247, 227, 21);
@@ -1156,83 +1193,75 @@ public class MainFrame extends JFrame {
 		btnNewButton_2_2_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-		            String titulo = textField_23.getText().trim();
-		            String codigo = txtPer.getText().trim();
-		            String issn = textField_32.getText().trim();
-		            String editorial = textField_26.getText().trim();
-		            String anoPublicacionStr = textField_25.getText().trim();
-		            String costoMultaStr = textField_27.getText().trim();
-		            String costoReparacionStr = textField_28.getText().trim();
-		            String seccionPrincipal = textField_33.getText().trim();
-		            String paisOrigen = textField_34.getText().trim();
+					String titulo = textField_23.getText().trim();
+					String codigo = txtPer.getText().trim();
+					String issn = textField_32.getText().trim();
+					String editorial = textField_26.getText().trim();
+					String anoPublicacionStr = textField_25.getText().trim();
+					String costoMultaStr = textField_27.getText().trim();
+					String costoReparacionStr = textField_28.getText().trim();
+					String seccionPrincipal = textField_33.getText().trim();
+					String paisOrigen = textField_34.getText().trim();
 
-		            boolean disponible = chckbxNewCheckBox_1_2.isSelected();
-		            boolean historico = chckbxNewCheckBox_1_2_1.isSelected();
+					boolean disponible = chckbxNewCheckBox_1_2.isSelected();
+					boolean historico = chckbxNewCheckBox_1_2_1.isSelected();
 
-		            Estado condicion = (Estado) comboBox.getSelectedItem();
-		            Date fechaPublicacionDate = (Date) spinner.getValue();
+					Estado condicion = (Estado) comboBox.getSelectedItem();
+					Date fechaPublicacionDate = (Date) spinner.getValue();
 					Idioma idioma = (Idioma) comboBox_5.getSelectedItem();
 
-		            if (titulo.isEmpty() || issn.isEmpty() || editorial.isEmpty()
-		                || anoPublicacionStr.isEmpty() || costoMultaStr.isEmpty() || costoReparacionStr.isEmpty()
-		                || idioma == null || seccionPrincipal.isEmpty() || paisOrigen.isEmpty()
-		                || condicion == null || fechaPublicacionDate == null||codigo.isEmpty()) {
-		                JOptionPane.showMessageDialog(null, "Completa todos los campos del formulario.");
-		                return;
-		            }
+					if (titulo.isEmpty() || issn.isEmpty() || editorial.isEmpty() || anoPublicacionStr.isEmpty()
+							|| costoMultaStr.isEmpty() || costoReparacionStr.isEmpty() || idioma == null
+							|| seccionPrincipal.isEmpty() || paisOrigen.isEmpty() || condicion == null
+							|| fechaPublicacionDate == null || codigo.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Completa todos los campos del formulario.");
+						return;
+					}
 
-		            int anoPublicacion = Integer.parseInt(anoPublicacionStr);
-		            double costoMultaDiaria = Double.parseDouble(costoMultaStr);
-		            double costoReparacion = Double.parseDouble(costoReparacionStr);
+					int anoPublicacion = Integer.parseInt(anoPublicacionStr);
+					double costoMultaDiaria = Double.parseDouble(costoMultaStr);
+					double costoReparacion = Double.parseDouble(costoReparacionStr);
 
-		            LocalDate fechaPublicacion = fechaPublicacionDate.toInstant()
-		                .atZone(ZoneId.systemDefault())
-		                .toLocalDate();
+					LocalDate fechaPublicacion = fechaPublicacionDate.toInstant().atZone(ZoneId.systemDefault())
+							.toLocalDate();
 
+					Periodico periodico = new Periodico();
+					periodico.setTitulo(titulo);
+					periodico.setCodigo(codigo);
+					periodico.setIssn(issn);
+					periodico.setEditorial(editorial);
+					periodico.setAñoPublicacion(anoPublicacion);
+					periodico.setCostoMultaDiaria(costoMultaDiaria);
+					periodico.setCostoReparacion(costoReparacion);
+					periodico.setIdioma(idioma);
+					periodico.setDisponible(disponible);
+					periodico.setHistorico(historico);
+					periodico.setEstado(condicion);
+					periodico.setSeccionPrincipal(seccionPrincipal);
+					periodico.setPaisOrigen(paisOrigen);
+					periodico.setFechaPublicacion(fechaPublicacion);
 
-		            Periodico periodico = new Periodico();
-		            periodico.setTitulo(titulo);
-		            periodico.setCodigo(codigo);
-		            periodico.setIssn(issn);
-		            periodico.setEditorial(editorial);
-		            periodico.setAñoPublicacion(anoPublicacion);
-		            periodico.setCostoMultaDiaria(costoMultaDiaria);
-		            periodico.setCostoReparacion(costoReparacion);
-		            periodico.setIdioma(idioma);
-		            periodico.setDisponible(disponible);
-		            periodico.setHistorico(historico);
-		            periodico.setEstado(condicion);
-		            periodico.setSeccionPrincipal(seccionPrincipal);
-		            periodico.setPaisOrigen(paisOrigen);
-		            periodico.setFechaPublicacion(fechaPublicacion);
-
-		            DataManager.getInstance().agregarInventario(periodico);
-		            JOptionPane.showMessageDialog(null, "Periódico agregado correctamente.");
-		        } catch (Exception ex) {
-		            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-		            ex.printStackTrace();
-		        }	
+					DataManager.getInstance().agregarInventario(periodico);
+					JOptionPane.showMessageDialog(null, "Periódico agregado correctamente.");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+					ex.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_2_2_2.setFont(new Font("Roboto", Font.BOLD, 14));
 		btnNewButton_2_2_2.setBounds(326, 412, 111, 25);
 		panel_8_2_1_2.add(btnNewButton_2_2_2);
 
-		
-
 		JLabel lblNewLabel_33_2_1_2_1 = new JLabel("Condición del Periódico");
 		lblNewLabel_33_2_1_2_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_33_2_1_2_1.setBounds(268, 170, 227, 17);
 		panel_8_2_1_2.add(lblNewLabel_33_2_1_2_1);
 
-		
-
 		JLabel lblNewLabel_33_2_1_2_2 = new JLabel("Histórico");
 		lblNewLabel_33_2_1_2_2.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_33_2_1_2_2.setBounds(268, 277, 227, 17);
 		panel_8_2_1_2.add(lblNewLabel_33_2_1_2_2);
-
-		
 
 		JLabel lblNewLabel_25 = new JLabel("Idioma");
 		lblNewLabel_25.setFont(new Font("Roboto", Font.BOLD, 14));
@@ -1279,10 +1308,6 @@ public class MainFrame extends JFrame {
 		lblNewLabel_33_2_1_2_5_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_33_2_1_2_5_1.setBounds(31, 386, 227, 17);
 		panel_8_2_1_2.add(lblNewLabel_33_2_1_2_5_1);
-
-		
-
-		
 
 		JPanel pnlPrestamos = new JPanel();
 		pnlPrestamos.setBackground(new Color(247, 203, 164, 120));
@@ -1366,6 +1391,26 @@ public class MainFrame extends JFrame {
 		panel_prestamo.add(scrollBar_17, BorderLayout.SOUTH);
 
 		tablePrestamoActivo = new JTable();
+		DefaultTableModel modelPrestamoActivo = new DefaultTableModel(new Object[][] {},
+				new String[] { "Id Prestamo", "Nombre Articulo", "ID Articulo", "Nombre Empleado", "ID Empleado",
+						"Nombre Usuario", "ID Usuario", "Fecha Prestamo", "Fecha Vencimiento", "Fecha Devolucion",
+						"Estado", "Multa Generada" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class, String.class, String.class, String.class,
+					String.class, String.class, Object.class, Object.class, Object.class, Object.class, Double.class };
+
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		};
+		for (Prestamo prestamo : dataManager.getPrestamosActivos()) {
+			modelPrestamoActivo.addRow(new Object[] { prestamo.getIdPrestamo(), prestamo.getArticulo().getTitulo(),
+					prestamo.getArticulo().getCodigo(), prestamo.getEmpleadoRegistrador().getNombre(),
+					prestamo.getEmpleadoRegistrador().getNumeroCredencial(), prestamo.getUsuario().getNombre(),
+					prestamo.getUsuario().getNumeroCredencial(), prestamo.getFechaPrestamo(),
+					prestamo.getFechaVencimiento(), prestamo.getFechaDevolucion(), prestamo.getEstado(),
+					prestamo.getMultaGenerada() });
+		}
+		tablePrestamoActivo.setModel(modelPrestamoActivo);
 		tablePrestamoActivo.setEnabled(false);
 		panel_prestamo.add(tablePrestamoActivo, BorderLayout.CENTER);
 
@@ -1403,6 +1448,27 @@ public class MainFrame extends JFrame {
 
 		tableHistorialPrestamos = new JTable();
 		tableHistorialPrestamos.setEnabled(false);
+		DefaultTableModel modelHistorialPrestamos = new DefaultTableModel(new Object[][] {},
+				new String[] { "Id Prestamo", "Nombre Articulo", "ID Articulo", "Nombre Empleado", "ID Empleado",
+						"Nombre Usuario", "ID Usuario", "Fecha Prestamo", "Fecha Vencimiento", "Fecha Devolucion",
+						"Estado", "Multa Generada" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class, String.class, String.class, String.class,
+					String.class, String.class, Object.class, Object.class, Object.class, Object.class, Double.class };
+
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		};
+		for (Prestamo prestamo : dataManager.getHistorialPrestamos()) {
+			modelHistorialPrestamos.addRow(new Object[] { prestamo.getIdPrestamo(), prestamo.getArticulo().getTitulo(),
+					prestamo.getArticulo().getCodigo(), prestamo.getEmpleadoRegistrador().getNombre(),
+					prestamo.getEmpleadoRegistrador().getNumeroCredencial(), prestamo.getUsuario().getNombre(),
+					prestamo.getUsuario().getNumeroCredencial(), prestamo.getFechaPrestamo(),
+					prestamo.getFechaVencimiento(), prestamo.getFechaDevolucion(), prestamo.getEstado(),
+					prestamo.getMultaGenerada() });
+		}
+		tableHistorialPrestamos.setModel(modelHistorialPrestamos);
+
 		panel_prestamo_1.add(tableHistorialPrestamos, BorderLayout.CENTER);
 
 		JPanel pnlGenerarPrestamo = new JPanel();
@@ -1526,6 +1592,7 @@ public class MainFrame extends JFrame {
 
 		table = new JTable();
 		table.setEnabled(false);
+		table.setModel(modelPrestamoActivo);
 		panel_prestamo_1_1.add(table, BorderLayout.CENTER);
 
 		JPanel pnlUsuarios = new JPanel();
@@ -1604,7 +1671,7 @@ public class MainFrame extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		};
-		for (Usuario user : usuarios) {
+		for (Usuario user : dataManager.getUsuarios()) {
 			modelUsuarios.addRow(new Object[] { user.getNumeroCredencial(), user.getNombre(),
 					user.getCorreoElectronico(), user.getTelefono(), user.getMultasPendientes(),
 					user.isInvestigadorAutorizado(), user.getNivelPermiso().toString() });
@@ -1956,7 +2023,7 @@ public class MainFrame extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		};
-		for (Empleado emp : personal) {
+		for (Empleado emp : dataManager.getPersonal()) {
 			modelPersonal.addRow(new Object[] { emp.getNumeroCredencial(), emp.getNombre(), emp.getCorreoElectronico(),
 					emp.getTelefono(), emp.getPuesto().toString(), emp.getDepartamento().toString(),
 					emp.getNivelPermiso().toString() });
