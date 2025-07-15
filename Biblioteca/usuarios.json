@@ -124,4 +124,13 @@
   "multasPendientes" : 12.4,
   "investigadorAutorizado" : true,
   "nivelPermiso" : "CONSULTA"
+}, {
+  "numeroCredencial" : "US-0009",
+  "nombre" : "MARIA SANCHEZ LOPEZ",
+  "correoElectronico" : "MARIA.SANCHEZ@ITESO.MX",
+  "telefono" : "+52-2378647834",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "multasPendientes" : 0.0,
+  "investigadorAutorizado" : false,
+  "nivelPermiso" : "CONSULTA"
 } ]

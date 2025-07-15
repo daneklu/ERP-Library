@@ -88,4 +88,13 @@
   "puesto" : "DIRECTOR",
   "departamento" : "ADMINISTRACION",
   "nivelPermiso" : "ADMIN"
+}, {
+  "numeroCredencial" : "EMP-10123",
+  "nombre" : "ROBERTO GOMEZ BOLAÑOS",
+  "correoElectronico" : "ROBERTO.GOMEZ@ITESO.MX",
+  "telefono" : "+52-3567112974",
+  "fechaRegistro" : [ 2025, 7, 14 ],
+  "puesto" : "CONSERVADOR",
+  "departamento" : "HISTORICOS",
+  "nivelPermiso" : "ALTO"
 } ]
