@@ -11,12 +11,17 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.SwingConstants;
 
 import com.iteso.biblioteca.manager.DataManager;
 import com.iteso.biblioteca.model.Empleado;
+import com.iteso.biblioteca.model.Libro;
+import com.iteso.biblioteca.model.Periodico;
+import com.iteso.biblioteca.model.Revista;
 import com.iteso.biblioteca.model.Usuario;
 import com.iteso.biblioteca.enums.*;
 
@@ -24,6 +29,7 @@ import java.awt.CardLayout;
 import javax.swing.JSeparator;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.util.ArrayList;
 import javax.swing.JTextField;
@@ -124,6 +130,7 @@ public class MainFrame extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_10;
 	private JTextField textField_14;
+	private JTextField textField_17;
 
 	public MainFrame() {
 		setIconImage(Toolkit.getDefaultToolkit()
@@ -620,15 +627,76 @@ public class MainFrame extends JFrame {
 		lblNewLabel_32_2_1_2_3_1_1.setBounds(31, 388, 227, 17);
 		panel_8_2_1_2_1_1.add(lblNewLabel_32_2_1_2_3_1_1);
 
-		JButton btnNewButton_2_2_2_1_1 = new JButton("Confirmar");
-		btnNewButton_2_2_2_1_1.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnNewButton_2_2_2_1_1.setBounds(326, 412, 154, 25);
-		panel_8_2_1_2_1_1.add(btnNewButton_2_2_2_1_1);
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setFont(new Font("Roboto", Font.PLAIN, 12));
+		comboBox_3.setModel(new DefaultComboBoxModel(Idioma.values()));
+		comboBox_3.setBounds(31, 301, 227, 21);
+		panel_8_2_1_2_1_1.add(comboBox_3);
 
 		JComboBox comboBox_2_1_1 = new JComboBox();
 		comboBox_2_1_1.setModel(new DefaultComboBoxModel(Genero.values()));
 		comboBox_2_1_1.setBounds(31, 415, 227, 20);
 		panel_8_2_1_2_1_1.add(comboBox_2_1_1);
+
+		JButton btnNewButton_2_2_2_1_1 = new JButton("Confirmar");
+		btnNewButton_2_2_2_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String titulo = textField_16.getText().trim();
+					String autor = textField_15.getText().trim();
+					String codigo = txtLib.getText().trim();
+					String editorial = textField_5.getText().trim();
+					String isbn = textField_31.getText().trim();
+					String anoPublicacionStr = textField_37.getText().trim();
+					String costoMultaStr = textField_13.getText().trim();
+					String costoReparacionStr = textField_38.getText().trim();
+					Idioma idioma = (Idioma) comboBox_3.getSelectedItem();
+					;
+
+					boolean disponible = chckbxNewCheckBox_1_2_2_1.isSelected();
+					boolean historico = chckbxNewCheckBox_1_2_1_1_1.isSelected();
+
+					Estado condicion = (Estado) comboBox_2_2.getSelectedItem();
+					Genero genero = (Genero) comboBox_2_1_1.getSelectedItem();
+
+					if (titulo.isEmpty() || autor.isEmpty() || codigo.isEmpty() || editorial.isEmpty() || isbn.isEmpty()
+							|| anoPublicacionStr.isEmpty() || costoMultaStr.isEmpty() || costoReparacionStr.isEmpty()
+							|| idioma == null || condicion == null || genero == null) {
+						JOptionPane.showMessageDialog(null, "Completa todos los campos del formulario.");
+						return;
+					}
+
+					int anoPublicacion = Integer.parseInt(anoPublicacionStr);
+					double costoMultaDiaria = Double.parseDouble(costoMultaStr);
+					double costoReparacion = Double.parseDouble(costoReparacionStr);
+
+					Libro libro = new Libro();
+					libro.setTitulo(titulo);
+					libro.setCodigo(codigo);
+					libro.setEditorial(editorial);
+					libro.setAñoPublicacion(anoPublicacion);
+					libro.setCostoMultaDiaria(costoMultaDiaria);
+					libro.setCostoReparacion(costoReparacion);
+					libro.setIdioma(idioma);
+					libro.setDisponible(disponible);
+					libro.setHistorico(historico);
+					libro.setEstado(condicion);
+
+					libro.setIsbn(isbn);
+					libro.setGenero(genero);
+					libro.setAutor(autor);
+
+					DataManager.getInstance().agregarInventario(libro);
+					JOptionPane.showMessageDialog(null, "Libro agregado correctamente.");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+					ex.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_2_2_2_1_1.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnNewButton_2_2_2_1_1.setBounds(326, 412, 154, 25);
+		panel_8_2_1_2_1_1.add(btnNewButton_2_2_2_1_1);
 
 		JLabel lblNewLabel_27 = new JLabel("Nombre del Autor");
 		lblNewLabel_27.setFont(new Font("Roboto", Font.BOLD, 14));
@@ -641,12 +709,6 @@ public class MainFrame extends JFrame {
 		textField_15.setColumns(10);
 		textField_15.setBounds(31, 89, 461, 21);
 		panel_8_2_1_2_1_1.add(textField_15);
-
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setFont(new Font("Roboto", Font.PLAIN, 12));
-		comboBox_3.setModel(new DefaultComboBoxModel(Idioma.values()));
-		comboBox_3.setBounds(31, 301, 227, 21);
-		panel_8_2_1_2_1_1.add(comboBox_3);
 
 		JPanel pnlEliminarArticulo = new JPanel();
 		pnlEliminarArticulo.setOpaque(false);
@@ -793,12 +855,6 @@ public class MainFrame extends JFrame {
 		lblNewLabel_33_2_1_2_5_1_1.setBounds(31, 386, 217, 17);
 		panel_8_2_1_2_1.add(lblNewLabel_33_2_1_2_5_1_1);
 
-		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setModel(new SpinnerNumberModel(1, 1, 12, 1));
-		spinner_1.setFont(new Font("Roboto", Font.PLAIN, 14));
-		spinner_1.setBounds(31, 413, 227, 24);
-		panel_8_2_1_2_1.add(spinner_1);
-
 		textField_22 = new JTextField();
 		textField_22.setForeground(Color.BLACK);
 		textField_22.setFont(new Font("Roboto", Font.PLAIN, 12));
@@ -836,7 +892,7 @@ public class MainFrame extends JFrame {
 		textField_35.setBounds(268, 141, 228, 21);
 		panel_8_2_1_2_1.add(textField_35);
 
-		JLabel lblNewLabel_33_2_1_2_1_1 = new JLabel("Condición del Periódico");
+		JLabel lblNewLabel_33_2_1_2_1_1 = new JLabel("Condición de Revista");
 		lblNewLabel_33_2_1_2_1_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_33_2_1_2_1_1.setBounds(268, 170, 227, 17);
 		panel_8_2_1_2_1.add(lblNewLabel_33_2_1_2_1_1);
@@ -873,20 +929,85 @@ public class MainFrame extends JFrame {
 		lblNewLabel_32_2_1_2_3_1.setBounds(268, 333, 227, 17);
 		panel_8_2_1_2_1.add(lblNewLabel_32_2_1_2_3_1);
 
-		JButton btnNewButton_2_2_2_1 = new JButton("Confirmar");
-		btnNewButton_2_2_2_1.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnNewButton_2_2_2_1.setBounds(326, 412, 111, 25);
-		panel_8_2_1_2_1.add(btnNewButton_2_2_2_1);
+		JComboBox comboBox_4 = new JComboBox();
+		comboBox_4.setModel(new DefaultComboBoxModel(Idioma.values()));
+		comboBox_4.setBounds(31, 247, 227, 21);
+		panel_8_2_1_2_1.add(comboBox_4);
 
 		JComboBox comboBox_2_1 = new JComboBox();
 		comboBox_2_1.setModel(new DefaultComboBoxModel(TematicaRevista.values()));
 		comboBox_2_1.setBounds(268, 358, 227, 20);
 		panel_8_2_1_2_1.add(comboBox_2_1);
 
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setModel(new DefaultComboBoxModel(Idioma.values()));
-		comboBox_4.setBounds(31, 247, 227, 21);
-		panel_8_2_1_2_1.add(comboBox_4);
+		JButton btnNewButton_2_2_2_1 = new JButton("Confirmar");
+		btnNewButton_2_2_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String titulo = textField_22.getText().trim();
+					String codigo = txtRev.getText().trim();
+					String issn = textField_30.getText().trim();
+					String editorial = textField_18.getText().trim();
+					String mesPublicacionStr = textField_17.getText().trim();
+					String costoMultaStr = textField_19.getText().trim();
+					String costoReparacionStr = textField_36.getText().trim();
+					Idioma idioma = (Idioma) comboBox_4.getSelectedItem();
+					String numeroEdicionStr = textField_21.getText().trim();
+					String anoPublicacionStr = textField_35.getText().trim();
+
+					boolean disponible = chckbxNewCheckBox_1_2_2.isSelected();
+					boolean historico = chckbxNewCheckBox_1_2_1_1.isSelected();
+
+					Estado condicion = (Estado) comboBox_2.getSelectedItem();
+					TematicaRevista tematica = (TematicaRevista) comboBox_2_1.getSelectedItem();
+
+					if (titulo.isEmpty() || issn.isEmpty() || codigo.isEmpty() || editorial.isEmpty()
+							|| mesPublicacionStr.isEmpty() || costoMultaStr.isEmpty() || costoReparacionStr.isEmpty()
+							|| idioma == null || tematica == null || condicion == null || numeroEdicionStr.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Completa todos los campos del formulario.");
+						return;
+					}
+
+					int anoPublicacion = Integer.parseInt(anoPublicacionStr);
+					int numeroEdicion = Integer.parseInt(numeroEdicionStr);
+					double costoMultaDiaria = Double.parseDouble(costoMultaStr);
+					double costoReparacion = Double.parseDouble(costoReparacionStr);
+
+					;
+
+					Revista revista = new Revista();
+					revista.setTitulo(titulo);
+					revista.setCodigo(codigo);
+					revista.setEditorial(editorial);
+					revista.setIssn(issn);
+					revista.setAñoPublicacion(anoPublicacion);
+					revista.setCostoMultaDiaria(costoMultaDiaria);
+					revista.setCostoReparacion(costoReparacion);
+					revista.setIdioma(idioma);
+					revista.setDisponible(disponible);
+					revista.setHistorico(historico);
+					revista.setEstado(condicion);
+					revista.setMesPublicacion(mesPublicacionStr);
+					revista.setNumeroEdicion(numeroEdicion);
+					revista.setTematica(tematica);
+
+					DataManager.getInstance().agregarInventario(revista);
+					JOptionPane.showMessageDialog(null, "Revista agregada correctamente.");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+					ex.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_2_2_2_1.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnNewButton_2_2_2_1.setBounds(326, 412, 111, 25);
+		panel_8_2_1_2_1.add(btnNewButton_2_2_2_1);
+
+		textField_17 = new JTextField();
+		textField_17.setForeground(Color.BLACK);
+		textField_17.setFont(new Font("Roboto", Font.PLAIN, 12));
+		textField_17.setColumns(10);
+		textField_17.setBounds(31, 405, 227, 21);
+		panel_8_2_1_2_1.add(textField_17);
 
 		JPanel pnlAgregarPeriodico = new JPanel();
 		pnlAgregarPeriodico.setLayout(null);
@@ -1004,36 +1125,114 @@ public class MainFrame extends JFrame {
 		textField_28.setColumns(10);
 		textField_28.setBounds(267, 248, 228, 21);
 		panel_8_2_1_2.add(textField_28);
-
-		JButton btnNewButton_2_2_2 = new JButton("Confirmar");
-		btnNewButton_2_2_2.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnNewButton_2_2_2.setBounds(326, 412, 111, 25);
-		panel_8_2_1_2.add(btnNewButton_2_2_2);
-
+		
 		JCheckBox chckbxNewCheckBox_1_2 = new JCheckBox("Disponible para prestamo");
 		chckbxNewCheckBox_1_2.setFont(new Font("Roboto", Font.BOLD, 12));
 		chckbxNewCheckBox_1_2.setBounds(28, 303, 179, 23);
 		panel_8_2_1_2.add(chckbxNewCheckBox_1_2);
+		
+		JCheckBox chckbxNewCheckBox_1_2_1 = new JCheckBox("Artículo de valor histórico");
+		chckbxNewCheckBox_1_2_1.setFont(new Font("Roboto", Font.BOLD, 12));
+		chckbxNewCheckBox_1_2_1.setBounds(267, 302, 228, 23);
+		panel_8_2_1_2.add(chckbxNewCheckBox_1_2_1);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(Estado.values()));
+		comboBox.setBounds(268, 195, 227, 20);
+		panel_8_2_1_2.add(comboBox);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setFont(new Font("Roboto", Font.PLAIN, 14));
+		spinner.setModel(new SpinnerDateModel(new Date(946706400000L), new Date(21600000L), new Date(1752300000000L),
+				Calendar.YEAR));
+		spinner.setBounds(31, 413, 244, 24);
+		panel_8_2_1_2.add(spinner);
+		
+		JComboBox comboBox_5 = new JComboBox();
+		comboBox_5.setModel(new DefaultComboBoxModel(Idioma.values()));
+		comboBox_5.setBounds(28, 247, 227, 21);
+		panel_8_2_1_2.add(comboBox_5);
+
+		JButton btnNewButton_2_2_2 = new JButton("Confirmar");
+		btnNewButton_2_2_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+		            String titulo = textField_23.getText().trim();
+		            String codigo = txtPer.getText().trim();
+		            String issn = textField_32.getText().trim();
+		            String editorial = textField_26.getText().trim();
+		            String anoPublicacionStr = textField_25.getText().trim();
+		            String costoMultaStr = textField_27.getText().trim();
+		            String costoReparacionStr = textField_28.getText().trim();
+		            String seccionPrincipal = textField_33.getText().trim();
+		            String paisOrigen = textField_34.getText().trim();
+
+		            boolean disponible = chckbxNewCheckBox_1_2.isSelected();
+		            boolean historico = chckbxNewCheckBox_1_2_1.isSelected();
+
+		            Estado condicion = (Estado) comboBox.getSelectedItem();
+		            Date fechaPublicacionDate = (Date) spinner.getValue();
+					Idioma idioma = (Idioma) comboBox_5.getSelectedItem();
+
+		            if (titulo.isEmpty() || issn.isEmpty() || editorial.isEmpty()
+		                || anoPublicacionStr.isEmpty() || costoMultaStr.isEmpty() || costoReparacionStr.isEmpty()
+		                || idioma == null || seccionPrincipal.isEmpty() || paisOrigen.isEmpty()
+		                || condicion == null || fechaPublicacionDate == null||codigo.isEmpty()) {
+		                JOptionPane.showMessageDialog(null, "Completa todos los campos del formulario.");
+		                return;
+		            }
+
+		            int anoPublicacion = Integer.parseInt(anoPublicacionStr);
+		            double costoMultaDiaria = Double.parseDouble(costoMultaStr);
+		            double costoReparacion = Double.parseDouble(costoReparacionStr);
+
+		            LocalDate fechaPublicacion = fechaPublicacionDate.toInstant()
+		                .atZone(ZoneId.systemDefault())
+		                .toLocalDate();
+
+
+		            Periodico periodico = new Periodico();
+		            periodico.setTitulo(titulo);
+		            periodico.setCodigo(codigo);
+		            periodico.setIssn(issn);
+		            periodico.setEditorial(editorial);
+		            periodico.setAñoPublicacion(anoPublicacion);
+		            periodico.setCostoMultaDiaria(costoMultaDiaria);
+		            periodico.setCostoReparacion(costoReparacion);
+		            periodico.setIdioma(idioma);
+		            periodico.setDisponible(disponible);
+		            periodico.setHistorico(historico);
+		            periodico.setEstado(condicion);
+		            periodico.setSeccionPrincipal(seccionPrincipal);
+		            periodico.setPaisOrigen(paisOrigen);
+		            periodico.setFechaPublicacion(fechaPublicacion);
+
+		            DataManager.getInstance().agregarInventario(periodico);
+		            JOptionPane.showMessageDialog(null, "Periódico agregado correctamente.");
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		            ex.printStackTrace();
+		        }	
+			}
+		});
+		btnNewButton_2_2_2.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnNewButton_2_2_2.setBounds(326, 412, 111, 25);
+		panel_8_2_1_2.add(btnNewButton_2_2_2);
+
+		
 
 		JLabel lblNewLabel_33_2_1_2_1 = new JLabel("Condición del Periódico");
 		lblNewLabel_33_2_1_2_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_33_2_1_2_1.setBounds(268, 170, 227, 17);
 		panel_8_2_1_2.add(lblNewLabel_33_2_1_2_1);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(Estado.values()));
-		comboBox.setBounds(268, 195, 227, 20);
-		panel_8_2_1_2.add(comboBox);
+		
 
 		JLabel lblNewLabel_33_2_1_2_2 = new JLabel("Histórico");
 		lblNewLabel_33_2_1_2_2.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_33_2_1_2_2.setBounds(268, 277, 227, 17);
 		panel_8_2_1_2.add(lblNewLabel_33_2_1_2_2);
 
-		JCheckBox chckbxNewCheckBox_1_2_1 = new JCheckBox("Artículo de valor histórico");
-		chckbxNewCheckBox_1_2_1.setFont(new Font("Roboto", Font.BOLD, 12));
-		chckbxNewCheckBox_1_2_1.setBounds(267, 302, 228, 23);
-		panel_8_2_1_2.add(chckbxNewCheckBox_1_2_1);
+		
 
 		JLabel lblNewLabel_25 = new JLabel("Idioma");
 		lblNewLabel_25.setFont(new Font("Roboto", Font.BOLD, 14));
@@ -1081,17 +1280,9 @@ public class MainFrame extends JFrame {
 		lblNewLabel_33_2_1_2_5_1.setBounds(31, 386, 227, 17);
 		panel_8_2_1_2.add(lblNewLabel_33_2_1_2_5_1);
 
-		JSpinner spinner = new JSpinner();
-		spinner.setFont(new Font("Roboto", Font.PLAIN, 14));
-		spinner.setModel(new SpinnerDateModel(new Date(946706400000L), new Date(21600000L), new Date(1752300000000L),
-				Calendar.YEAR));
-		spinner.setBounds(31, 413, 244, 24);
-		panel_8_2_1_2.add(spinner);
+		
 
-		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setModel(new DefaultComboBoxModel(Idioma.values()));
-		comboBox_5.setBounds(28, 247, 227, 21);
-		panel_8_2_1_2.add(comboBox_5);
+		
 
 		JPanel pnlPrestamos = new JPanel();
 		pnlPrestamos.setBackground(new Color(247, 203, 164, 120));
@@ -1593,15 +1784,65 @@ public class MainFrame extends JFrame {
 		textField_12.setBounds(311, 369, 185, 21);
 		panel_8_2.add(textField_12);
 
-		JButton btnNewButton_2 = new JButton("Confirmar");
-		btnNewButton_2.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnNewButton_2.setBounds(208, 419, 111, 25);
-		panel_8_2.add(btnNewButton_2);
-
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Acceso a Artículos Privados");
 		chckbxNewCheckBox.setFont(new Font("Roboto", Font.BOLD, 12));
 		chckbxNewCheckBox.setBounds(311, 292, 185, 23);
 		panel_8_2.add(chckbxNewCheckBox);
+
+		JButton btnNewButton_2 = new JButton("Confirmar");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nombre = textField_7.getText().trim();
+				String apellidoPaterno = textField_8.getText().trim();
+				String apellidoMaterno = textField_9.getText().trim();
+				String numeroID = txtUs.getText().trim();
+				String correo = textField_11.getText().trim();
+				String telefono = textField_12.getText().trim();
+				boolean investigadorAutorizado = chckbxNewCheckBox.isSelected();
+
+				if (nombre.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío");
+					return;
+				}
+				if (apellidoPaterno.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "El apellido paterno no puede estar vacío");
+					return;
+				}
+				if (apellidoMaterno.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "El apellido materno no puede estar vacío");
+					return;
+				}
+				if (numeroID.isEmpty() || !numeroID.startsWith("US-")) {
+					JOptionPane.showMessageDialog(null, "El número de ID debe comenzar con 'US-'");
+					return;
+				}
+				if (correo.isEmpty() || !correo.contains("@")) {
+					JOptionPane.showMessageDialog(null, "El correo electrónico no es válido");
+					return;
+				}
+				if (telefono.isEmpty() || !telefono.startsWith("+52-")) {
+					JOptionPane.showMessageDialog(null, "El teléfono debe comenzar con '+52-'");
+					return;
+				}
+				String telefonoSinPrefijo = telefono.substring(4);
+				if (!telefonoSinPrefijo.matches("\\d+")) {
+					JOptionPane.showMessageDialog(null,
+							"El número de teléfono debe contener solo dígitos después de '+52-'");
+					return;
+				}
+
+				String nombreCompleto = nombre + " " + apellidoPaterno + " " + apellidoMaterno;
+
+				Usuario nuevoUsuario = new Usuario(numeroID, nombreCompleto, correo, telefono, investigadorAutorizado);
+
+				DataManager.getInstance().agregarUsuario(nuevoUsuario);
+				JOptionPane.showMessageDialog(null, "Usuario registrado correctamente.");
+			}
+
+		});
+		btnNewButton_2.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnNewButton_2.setBounds(208, 419, 111, 25);
+		panel_8_2.add(btnNewButton_2);
 
 		JPanel pnlEliminarUsuario = new JPanel();
 		pnlEliminarUsuario.setOpaque(false);
@@ -1915,6 +2156,56 @@ public class MainFrame extends JFrame {
 		JButton btnNewButton_2_1 = new JButton("Confirmar");
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String nombre = textField.getText().trim();
+				String apellidoPaterno = textField_1.getText().trim();
+				String apellidoMaterno = textField_2.getText().trim();
+				String numeroID = txtEmp.getText().trim();
+				Puesto puesto = (Puesto) comboBox_1.getSelectedItem();
+				String correo = textField_4.getText().trim();
+				String telefono = textField_6.getText().trim();
+
+				if (nombre.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío");
+					return;
+				}
+				if (apellidoPaterno.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "El apellido paterno no puede estar vacío");
+					return;
+				}
+				if (apellidoMaterno.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "El apellido materno no puede estar vacío");
+					return;
+				}
+				if (numeroID.isEmpty() || !numeroID.startsWith("EMP-")) {
+					JOptionPane.showMessageDialog(null, "El número de ID debe comenzar con 'EMP-'");
+					return;
+				}
+				if (puesto == null) {
+					JOptionPane.showMessageDialog(null, "Debe seleccionar un puesto");
+					return;
+				}
+				if (correo.isEmpty() || !correo.contains("@")) {
+					JOptionPane.showMessageDialog(null, "El correo electrónico no es válido");
+					return;
+				}
+				if (telefono.isEmpty() || !telefono.startsWith("+52-")) {
+					JOptionPane.showMessageDialog(null, "El teléfono debe comenzar con '+52-'");
+					return;
+				}
+				String telefonoSinPrefijo = telefono.substring(4);
+				if (!telefonoSinPrefijo.matches("\\d+")) {
+					JOptionPane.showMessageDialog(null,
+							"El número de teléfono debe contener solo dígitos después de '+52-'");
+					return;
+				}
+
+				String nombreCompleto = nombre + " " + apellidoPaterno + " " + apellidoMaterno;
+
+				Empleado nuevoEmpleado = new Empleado(numeroID, nombreCompleto, correo, telefono, puesto);
+
+				DataManager.getInstance().agregarEmpleado(nuevoEmpleado);
+				JOptionPane.showMessageDialog(null, "Empleado registrado correctamente.");
+
 			}
 		});
 		btnNewButton_2_1.setFont(new Font("Roboto", Font.BOLD, 14));
