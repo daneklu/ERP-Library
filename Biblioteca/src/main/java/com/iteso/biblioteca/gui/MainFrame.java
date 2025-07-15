@@ -49,6 +49,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Calendar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JTable;
@@ -410,6 +412,58 @@ public class MainFrame extends JFrame {
 		panel_10_3.add(textField_45, BorderLayout.CENTER);
 
 		JButton btnNewButton_3_3 = new JButton("Confirmar");
+		btnNewButton_3_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String busquedaTitulo = textField_45.getText().trim().toLowerCase();
+
+				DefaultTableModel modelArticulos = new DefaultTableModel(new Object[][] {}, new String[] { "Código",
+						"Título", "Tipo", "Año", "Editorial", "Disponible", "Detalle Específico" }) {
+					Class[] columnTypes = new Class[] { String.class, String.class, String.class, Integer.class,
+							String.class, String.class, String.class };
+
+					@Override
+					public Class<?> getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+				};
+
+				List<Articulo> inventario = dataManager.getInventario();
+
+				if (busquedaTitulo.isEmpty()) {
+					for (Articulo articulo : inventario) {
+						agregarFila(modelArticulos, articulo);
+					}
+				} else {
+					for (Articulo articulo : inventario) {
+						if (articulo.getTitulo().toLowerCase().contains(busquedaTitulo)) {
+							agregarFila(modelArticulos, articulo);
+						}
+					}
+				}
+
+				tableArticuloN.setModel(modelArticulos);
+			}
+
+			private void agregarFila(DefaultTableModel model, Articulo articulo) {
+				String tipo = "";
+				String detalle = "";
+
+				if (articulo instanceof Libro) {
+					tipo = "Libro";
+					detalle = "Autor: " + ((Libro) articulo).getAutor();
+				} else if (articulo instanceof Revista) {
+					tipo = "Revista";
+					detalle = "Temática: " + ((Revista) articulo).getTematica();
+				} else if (articulo instanceof Periodico) {
+					tipo = "Periódico";
+					detalle = "Sección: " + ((Periodico) articulo).getSeccionPrincipal();
+				}
+
+				model.addRow(
+						new Object[] { articulo.getCodigo(), articulo.getTitulo(), tipo, articulo.getAñoPublicacion(),
+								articulo.getEditorial(), articulo.isDisponible() ? "Sí" : "No", detalle });
+			}
+		});
 		btnNewButton_3_3.setFont(new Font("Roboto", Font.PLAIN, 10));
 		panel_10_3.add(btnNewButton_3_3, BorderLayout.EAST);
 
@@ -482,6 +536,64 @@ public class MainFrame extends JFrame {
 		panel_10_3_1.add(textField_46, BorderLayout.CENTER);
 
 		JButton btnNewButton_3_3_1 = new JButton("Confirmar");
+		btnNewButton_3_3_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String busquedaID = textField_46.getText().trim().toLowerCase();
+
+				DefaultTableModel modelArticulos = new DefaultTableModel(new Object[][] {}, new String[] { "Código",
+						"Título", "Tipo", "Año", "Editorial", "Disponible", "Detalle Específico" }) {
+					Class[] columnTypes = new Class[] { String.class, String.class, String.class, Integer.class,
+							String.class, String.class, String.class };
+
+					@Override
+					public Class<?> getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+				};
+
+				List<Articulo> inventario = dataManager.getInventario();
+
+				if (busquedaID.isEmpty()) {
+					for (Articulo articulo : inventario) {
+						agregarFila(modelArticulos, articulo);
+					}
+				}
+
+				else {
+					for (Articulo articulo : inventario) {
+
+						if (articulo.getCodigo().toLowerCase().equals(busquedaID)) {
+							agregarFila(modelArticulos, articulo);
+
+							break;
+						}
+					}
+				}
+
+				tableArticuloID.setModel(modelArticulos);
+			}
+
+			private void agregarFila(DefaultTableModel model, Articulo articulo) {
+				String tipo = "";
+				String detalle = "";
+
+				if (articulo instanceof Libro) {
+					tipo = "Libro";
+					detalle = "Autor: " + ((Libro) articulo).getAutor();
+				} else if (articulo instanceof Revista) {
+					tipo = "Revista";
+					detalle = "Temática: " + ((Revista) articulo).getTematica();
+				} else if (articulo instanceof Periodico) {
+					tipo = "Periódico";
+					detalle = "Sección: " + ((Periodico) articulo).getSeccionPrincipal();
+				}
+
+				model.addRow(
+						new Object[] { articulo.getCodigo(), articulo.getTitulo(), tipo, articulo.getAñoPublicacion(),
+								articulo.getEditorial(), articulo.isDisponible() ? "Sí" : "No", detalle });
+			}
+		});
 		btnNewButton_3_3_1.setFont(new Font("Roboto", Font.PLAIN, 10));
 		panel_10_3_1.add(btnNewButton_3_3_1, BorderLayout.EAST);
 
@@ -769,7 +881,78 @@ public class MainFrame extends JFrame {
 		textField_47.setColumns(10);
 		panel_10_3_1_1.add(textField_47, BorderLayout.CENTER);
 
-		JButton btnNewButton_3_3_1_1 = new JButton("Confirmar");
+		JButton btnNewButton_3_3_1_1 = new JButton("Eliminar");
+		btnNewButton_3_3_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String idEliminar = textField_47.getText().trim();
+
+				if (idEliminar.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID para eliminar", "Campo vacío",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				boolean encontrado = false;
+				List<Articulo> inventario = dataManager.getInventario();
+				Iterator<Articulo> iterator = inventario.iterator();
+
+				while (iterator.hasNext()) {
+					Articulo articulo = iterator.next();
+					if (articulo.getCodigo().equalsIgnoreCase(idEliminar)) {
+						iterator.remove();
+						encontrado = true;
+						break;
+					}
+				}
+
+				if (encontrado) {
+					JOptionPane.showMessageDialog(null, "Artículo eliminado correctamente", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+					actualizarTablaEliminacion(tableArticuloElim, inventario);
+				} else {
+					JOptionPane.showMessageDialog(null, "No se encontró un artículo con el ID: " + idEliminar,
+							"Artículo no encontrado", JOptionPane.ERROR_MESSAGE);
+				}
+
+				textField_47.setText("");
+			}
+
+			private void actualizarTablaEliminacion(JTable tabla, List<Articulo> inventario) {
+				DefaultTableModel model = new DefaultTableModel(new Object[][] {}, new String[] { "Código", "Título",
+						"Tipo", "Año", "Editorial", "Disponible", "Detalle Específico" }) {
+					Class[] columnTypes = new Class[] { String.class, String.class, String.class, Integer.class,
+							String.class, String.class, String.class };
+
+					@Override
+					public Class<?> getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+				};
+
+				for (Articulo articulo : inventario) {
+					String tipo = "";
+					String detalle = "";
+
+					if (articulo instanceof Libro) {
+						tipo = "Libro";
+						detalle = "Autor: " + ((Libro) articulo).getAutor();
+					} else if (articulo instanceof Revista) {
+						tipo = "Revista";
+						detalle = "Temática: " + ((Revista) articulo).getTematica();
+					} else if (articulo instanceof Periodico) {
+						tipo = "Periódico";
+						detalle = "Sección: " + ((Periodico) articulo).getSeccionPrincipal();
+					}
+
+					model.addRow(new Object[] { articulo.getCodigo(), articulo.getTitulo(), tipo,
+							articulo.getAñoPublicacion(), articulo.getEditorial(),
+							articulo.isDisponible() ? "Sí" : "No", detalle });
+				}
+
+				tabla.setModel(model);
+			}
+		});
 		btnNewButton_3_3_1_1.setFont(new Font("Roboto", Font.PLAIN, 10));
 		panel_10_3_1_1.add(btnNewButton_3_3_1_1, BorderLayout.EAST);
 
